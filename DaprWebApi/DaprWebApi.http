@@ -1,6 +1,36 @@
-@DaprWebApi_HostAddress = https://localhost:7007
+@HostAddress = https://localhost:7007
 
-GET {{DaprWebApi_HostAddress}}/
+GET {{@HostAddress}}/state
 Accept: application/json
 
-###
+### State -> Save
+
+POST {{@HostAddress}}/state
+Content-type: application/json
+
+{
+  "Name": "John Doe",
+  "Age": 10
+}
+
+### State -> Delete
+
+DELETE {{@HostAddress}}/state
+
+### State -> Get with ETag
+
+GET {{@HostAddress}}/state/with-etag
+Accept: application/json
+
+### State -> Save with ETag
+
+POST {{@HostAddress}}/state/with-etag
+Content-type: application/json
+
+{
+    "eTag": "1",
+    "state": {
+        "name": "John Doe",
+        "age": 15
+    }
+}
