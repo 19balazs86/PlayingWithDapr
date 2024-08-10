@@ -19,8 +19,6 @@ public static class Program
 
         // Configure the HTTP request pipeline
         {
-            app.UseHttpsRedirection();
-
             app.MapGet("/", () => "Hello DaprWebApi");
 
             app.MapStateEndpoints();

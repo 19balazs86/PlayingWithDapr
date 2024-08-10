@@ -1,35 +1,19 @@
-using System.Collections.Immutable;
-
 namespace EchoWebApi;
 
 public static class Program
 {
-    private static readonly ImmutableList<string> _catchAllHttpMethods = ["GET", "POST", "PUT", "DELETE"];
-
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        IServiceCollection services = builder.Services;
-
-        // Add services to the container
-        {
-
-        }
-
         WebApplication app = builder.Build();
 
-        // Configure the HTTP request pipeline
-        {
-            app.UseHttpsRedirection();
-
-            app.MapMethods("/{**catchAll}", _catchAllHttpMethods, catchAll);
-        }
+        app.MapFallback(handelAllRequests);
 
         app.Run();
     }
 
-    private static async Task catchAll(HttpContext context, CancellationToken ct)
+    private static async Task<EchoResponse> handelAllRequests(HttpContext context, CancellationToken ct)
     {
         await Task.Delay(2_000, ct);
 
@@ -48,9 +32,7 @@ public static class Program
             Body        = body
         };
 
-        HttpResponse httpResponse = context.Response;
-
-        await httpResponse.WriteAsJsonAsync(response);
+        return response;
     }
 }
 
