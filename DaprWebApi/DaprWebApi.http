@@ -1,0 +1,6 @@
+@DaprWebApi_HostAddress = https://localhost:7007
+
+GET {{DaprWebApi_HostAddress}}/
+Accept: application/json
+
+###
