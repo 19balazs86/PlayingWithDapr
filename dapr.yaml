@@ -1,0 +1,10 @@
+version: 1
+
+common:
+  resourcesPath: ./Resources
+
+apps:
+- appID: webapi
+  appDirPath: ./DaprWebApi
+  appPort: 7007
+  command: ["dotnet", "run"]
