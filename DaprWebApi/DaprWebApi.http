@@ -1,11 +1,11 @@
 @HostAddress = https://localhost:7007
 
-GET {{@HostAddress}}/state
+GET {{HostAddress}}/state
 Accept: application/json
 
 ### State -> Save
 
-POST {{@HostAddress}}/state
+POST {{HostAddress}}/state
 Content-type: application/json
 
 {
@@ -15,16 +15,16 @@ Content-type: application/json
 
 ### State -> Delete
 
-DELETE {{@HostAddress}}/state
+DELETE {{HostAddress}}/state
 
 ### State -> Get with ETag
 
-GET {{@HostAddress}}/state/with-etag
+GET {{HostAddress}}/state/with-etag
 Accept: application/json
 
 ### State -> Save with ETag
 
-POST {{@HostAddress}}/state/with-etag
+POST {{HostAddress}}/state/with-etag
 Content-type: application/json
 
 {
@@ -34,3 +34,8 @@ Content-type: application/json
         "age": 15
     }
 }
+
+### Invoke Method
+
+GET {{HostAddress}}/invoke-method
+Accept: application/json

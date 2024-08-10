@@ -13,8 +13,6 @@ public static class Program
         // Add services to the container
         {
             services.AddDaprClient();
-
-            //services.AddSingleton(DaprClient.CreateInvokeHttpClient("echo-server"));
         }
 
         WebApplication app = builder.Build();
@@ -26,6 +24,7 @@ public static class Program
             app.MapGet("/", () => "Hello DaprWebApi");
 
             app.MapStateEndpoints();
+            app.MapInvokeMethodEndpoints();
         }
 
         app.Run();
