@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "d4e9e4ab-232c-4133-8f0f-1f0f90337775",
+		"name": "Dapr",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8316451"
+	},
+	"item": [
+		{
+			"name": "State",
+			"item": [
+				{
+					"name": "GetState",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HostAddress}}/state",
+							"host": [
+								"{{HostAddress}}"
+							],
+							"path": [
+								"state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SaveState",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\": \"John Doe\",\r\n    \"Age\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostAddress}}/state",
+							"host": [
+								"{{HostAddress}}"
+							],
+							"path": [
+								"state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteState",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HostAddress}}/state",
+							"host": [
+								"{{HostAddress}}"
+							],
+							"path": [
+								"state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetStateAndETag",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HostAddress}}/state/with-etag",
+							"host": [
+								"{{HostAddress}}"
+							],
+							"path": [
+								"state",
+								"with-etag"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SaveStateWithETag",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"eTag\": \"1\",\r\n    \"state\": {\r\n        \"name\": \"Jane Doe\",\r\n        \"age\": 15\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostAddress}}/state/with-etag",
+							"host": [
+								"{{HostAddress}}"
+							],
+							"path": [
+								"state",
+								"with-etag"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoke method",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HostAddress}}/invoke-method",
+					"host": [
+						"{{HostAddress}}"
+					],
+					"path": [
+						"invoke-method"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HostAddress",
+			"value": "https://localhost:7007",
+			"type": "string"
+		}
+	]
+}
