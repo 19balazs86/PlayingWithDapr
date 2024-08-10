@@ -17,13 +17,16 @@ This repository contains several examples to test Dapr features.
 ## Resources
 
 - [Documentation](https://docs.dapr.io) 📓*Official*
-  - [QuickStarts examples](https://docs.dapr.io/getting-started/quickstarts) | [Example code](https://github.com/dapr/quickstarts) 👤*Dapr Quickstarts*
   - [Building blocks](https://docs.dapr.io/developing-applications/building-blocks)
   - [Reference](https://docs.dapr.io/reference)
     - [Dapr API](https://docs.dapr.io/reference/api)
     - [Component specs](https://docs.dapr.io/reference/components-reference)
     - [Dapr CLI](https://docs.dapr.io/reference/cli)
   - [Multi-App Run](https://docs.dapr.io/developing-applications/local-development/multi-app-dapr-run) (with file: dapr.yaml)
-- [Dapr SDK](https://github.com/dapr/dotnet-sdk), [Examples](https://github.com/dapr/dotnet-sdk/tree/master/examples) 👤*Dapr*
-- [Azure Container Apps with Dapr overview](https://learn.microsoft.com/en-us/azure/container-apps/dapr-overview) 📚*MS-Learn*
-- [eBook: Dapr for .NET Developers](https://github.com/dotnet-architecture/eBooks/blob/1ed30275281b9060964fcb2a4c363fe7797fe3f3/current/dapr-for-net-developers/Dapr-for-NET-Developers.pdf) 👤*.NET Architecture*
+- Examples
+  - [QuickStarts examples](https://docs.dapr.io/getting-started/quickstarts) 📓 | [with code](https://github.com/dapr/quickstarts) 👤*Quickstarts*
+  - [Examples](https://github.com/dapr/dotnet-sdk/tree/master/examples) 👤*SDK*
+- eBook: [Dapr for .NET Developers](https://github.com/dotnet-architecture/eBooks/blob/1ed30275281b9060964fcb2a4c363fe7797fe3f3/current/dapr-for-net-developers/Dapr-for-NET-Developers.pdf) 👤*.NET Architecture*
+- Other
+  - [Azure Container Apps with Dapr overview](https://learn.microsoft.com/en-us/azure/container-apps/dapr-overview) 📚*MS-Learn*
+  - [Dapr with .NET Aspire](https://learn.microsoft.com/en-us/dotnet/aspire/frameworks/dapr) 📚*MS-Learn*
