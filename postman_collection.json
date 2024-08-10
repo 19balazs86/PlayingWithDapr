@@ -10,6 +10,28 @@
 			"name": "State",
 			"item": [
 				{
+					"name": "GetState via Dapr",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3510/v1.0/state/MyStateStore/test-key",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3510",
+							"path": [
+								"v1.0",
+								"state",
+								"MyStateStore",
+								"test-key"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "GetState",
 					"request": {
 						"method": "GET",
@@ -70,7 +92,7 @@
 					"response": []
 				},
 				{
-					"name": "GetStateAndETag",
+					"name": "GetState and ETag",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -88,7 +110,7 @@
 					"response": []
 				},
 				{
-					"name": "SaveStateWithETag",
+					"name": "SaveState with ETag",
 					"request": {
 						"method": "POST",
 						"header": [],

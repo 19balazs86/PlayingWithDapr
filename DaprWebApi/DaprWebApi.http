@@ -3,6 +3,10 @@
 GET {{HostAddress}}/state
 Accept: application/json
 
+### GetState via Dapr
+GET http://localhost:3510/v1.0/state/MyStateStore/test-key
+Accept: application/json
+
 ### State -> Save
 
 POST {{HostAddress}}/state
@@ -28,11 +32,11 @@ POST {{HostAddress}}/state/with-etag
 Content-type: application/json
 
 {
-    "eTag": "1",
-    "state": {
-        "name": "John Doe",
-        "age": 15
-    }
+  "eTag": "1",
+  "state": {
+    "name": "John Doe",
+    "age": 15
+  }
 }
 
 ### Invoke Method
