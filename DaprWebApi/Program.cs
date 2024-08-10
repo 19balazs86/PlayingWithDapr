@@ -1,3 +1,5 @@
+using DaprWebApi.Endpoints;
+
 namespace DaprWebApi;
 
 public static class Program
@@ -10,7 +12,9 @@ public static class Program
 
         // Add services to the container
         {
+            services.AddDaprClient();
 
+            //services.AddSingleton(DaprClient.CreateInvokeHttpClient("echo-server"));
         }
 
         WebApplication app = builder.Build();
@@ -20,6 +24,8 @@ public static class Program
             app.UseHttpsRedirection();
 
             app.MapGet("/", () => "Hello DaprWebApi");
+
+            app.MapStateEndpoints();
         }
 
         app.Run();

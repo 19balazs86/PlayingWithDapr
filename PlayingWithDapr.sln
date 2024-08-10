@@ -6,9 +6,10 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CA691D8E-6BC7-4DF8-8EA3-FA832FE874ED}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
+		Resources\statestore.yaml = Resources\statestore.yaml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaprWebApi", "DaprWebApi\DaprWebApi.csproj", "{7DA4668F-44C3-4413-BE63-7DFFE037B7BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaprWebApi", "DaprWebApi\DaprWebApi.csproj", "{7DA4668F-44C3-4413-BE63-7DFFE037B7BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
