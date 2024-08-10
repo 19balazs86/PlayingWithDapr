@@ -13,7 +13,7 @@ public static class Program
         app.Run();
     }
 
-    private static async Task<EchoResponse> handelAllRequests(HttpContext context, CancellationToken ct)
+    private static async Task<EchoResponse> handelAllRequests(HttpContext context, ILogger<EchoResponse> logger, CancellationToken ct)
     {
         await Task.Delay(2_000, ct);
 
@@ -31,6 +31,9 @@ public static class Program
             QueryString = request.QueryString.ToString(),
             Body        = body
         };
+
+        // This log message will appear in the Output window from Dapr
+        logger.LogInformation("Handle {method}:{path}", response.Method, response.Path);
 
         return response;
     }

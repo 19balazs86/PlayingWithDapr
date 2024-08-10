@@ -3,10 +3,6 @@
 GET {{HostAddress}}/state
 Accept: application/json
 
-### GetState via Dapr
-GET http://localhost:3510/v1.0/state/MyStateStore/test-key
-Accept: application/json
-
 ### State -> Save
 
 POST {{HostAddress}}/state
@@ -42,4 +38,12 @@ Content-type: application/json
 ### Invoke Method
 
 GET {{HostAddress}}/invoke-method
+Accept: application/json
+
+### GetState via Dapr
+GET http://localhost:3510/v1.0/state/MyStateStore/test-key
+Accept: application/json
+
+### Invoke via Dapr
+GET http://localhost:3510/v1.0/invoke/echo-server/method/my-endpoint-name?key=value
 Accept: application/json

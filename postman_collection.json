@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "State",
+			"name": "Dapr endpoints",
 			"item": [
 				{
 					"name": "GetState via Dapr",
@@ -31,6 +31,40 @@
 					},
 					"response": []
 				},
+				{
+					"name": "Invoke via Dapr",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3510/v1.0/invoke/echo-server/method/my-endpoint-name?key=value",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3510",
+							"path": [
+								"v1.0",
+								"invoke",
+								"echo-server",
+								"method",
+								"my-endpoint-name"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "value"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "State",
+			"item": [
 				{
 					"name": "GetState",
 					"request": {
