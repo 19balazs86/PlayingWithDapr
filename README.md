@@ -9,7 +9,6 @@ This repository contains several examples to test Dapr features.
   - Option #2: `winget install Dapr.CLI`
 - Runtime: [Upgrade](https://docs.dapr.io/operations/hosting/self-hosted/self-hosted-upgrade) or install: [Dapr in self-hosted mode without Docker](https://docs.dapr.io/operations/hosting/self-hosted/self-hosted-no-docker) `dapr init --slim`
   - [Latest runtime](https://github.com/dapr/dapr/releases/latest) 👤*Dapr*
-
 - Run: Redis server on localhost
 - Run the dapr.yaml file
   - Option #1: Using the Darp CLI: `dapr run -f .`
