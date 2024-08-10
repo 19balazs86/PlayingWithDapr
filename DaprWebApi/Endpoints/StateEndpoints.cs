@@ -11,16 +11,21 @@ public static class StateEndpoints
     private const string _storeName = "MyStateStore";
     private const string _stateKey  = "test-key";
 
+    private static readonly Dictionary<string, string> _metadata = new() { ["ttlInSeconds"] = "120" }; // TTL set to 2 minutes
+
     public static void MapStateEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("/state");
 
-        group.MapGet("/",    stateGet);
-        group.MapPost("/",   statePost);
-        group.MapDelete("/", stateDelete);
+        group.MapGet("/",    getState);
+        group.MapPost("/",   postState);
+        group.MapDelete("/", deleteState);
+
+        group.MapGet("/with-etag",  getStateAndETag);
+        group.MapPost("/with-etag", postStateWithETag);
     }
 
-    private static async Task<Results<Ok<StateObject>, NoContent>> stateGet(DaprClient daprClient)
+    private static async Task<Results<Ok<StateObject>, NoContent>> getState(DaprClient daprClient)
     {
         StateObject? stateObject = await daprClient.GetStateAsync<StateObject?>(_storeName, _stateKey);
 
@@ -32,20 +37,40 @@ public static class StateEndpoints
         return TypedResults.Ok(stateObject);
     }
 
-    private static async Task statePost(StateObject stateObject, DaprClient daprClient)
+    private static async Task postState(StateObject stateObject, DaprClient daprClient)
     {
-        var metadata = new Dictionary<string, string>
-        {
-            ["ttlInSeconds"] = "120" // TTL set to 2 minutes
-        };
-
-        await daprClient.SaveStateAsync(_storeName, _stateKey, stateObject, metadata: metadata);
+        await daprClient.SaveStateAsync(_storeName, _stateKey, stateObject, metadata: _metadata);
     }
 
-    private static async Task stateDelete(DaprClient daprClient)
+    private static async Task deleteState(DaprClient daprClient)
     {
         await daprClient.DeleteStateAsync(_storeName, _stateKey);
+
+        // await daprClient.TryDeleteStateAsync(_storeName, _stateKey, etag);
+    }
+
+    private static async Task<Results<Ok<ETagStateObject>, NoContent>> getStateAndETag(DaprClient daprClient)
+    {
+        // Examples: https://github.com/dapr/dotnet-sdk/blob/master/examples/Client/StateManagement/StateStoreETagsExample.cs
+
+        (StateObject? stateObject, string etag) = await daprClient.GetStateAndETagAsync<StateObject?>(_storeName, _stateKey);
+
+        if (stateObject is null)
+        {
+            return TypedResults.NoContent();
+        }
+
+        return TypedResults.Ok(new ETagStateObject(etag, stateObject));
+    }
+
+    private static async Task<string> postStateWithETag(ETagStateObject etagState, DaprClient daprClient)
+    {
+        bool isSaved = await daprClient.TrySaveStateAsync(_storeName, _stateKey, etagState.State, etagState.ETag, metadata: _metadata);
+
+        return isSaved ? "Saved" : "ETag does not math!";
     }
 }
 
 public sealed record StateObject(string Name, int Age);
+
+public sealed record ETagStateObject(string ETag, StateObject State);
