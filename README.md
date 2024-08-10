@@ -18,7 +18,7 @@ This repository contains several examples to test Dapr features.
 
 - [Documentation](https://docs.dapr.io) 📓*Official*
   - [Building blocks](https://docs.dapr.io/developing-applications/building-blocks)
-  - [Reference](https://docs.dapr.io/reference)
+  - Reference
     - [Dapr API](https://docs.dapr.io/reference/api)
     - [Component specs](https://docs.dapr.io/reference/components-reference)
     - [Dapr CLI](https://docs.dapr.io/reference/cli)
@@ -26,7 +26,7 @@ This repository contains several examples to test Dapr features.
 - Examples
   - [QuickStarts examples](https://docs.dapr.io/getting-started/quickstarts) 📓 | [with code](https://github.com/dapr/quickstarts) 👤*Quickstarts*
   - [Examples](https://github.com/dapr/dotnet-sdk/tree/master/examples) 👤*SDK*
-- eBook: [Dapr for .NET Developers](https://github.com/dotnet-architecture/eBooks/blob/1ed30275281b9060964fcb2a4c363fe7797fe3f3/current/dapr-for-net-developers/Dapr-for-NET-Developers.pdf) 👤*.NET Architecture*
+- eBook: [Dapr for .NET Developers](https://github.com/dotnet-architecture/eBooks/blob/1ed30275281b9060964fcb2a4c363fe7797fe3f3/current/dapr-for-net-developers/Dapr-for-NET-Developers.pdf) 👤*DotNET Architecture*
 - Other
   - [Azure Container Apps with Dapr overview](https://learn.microsoft.com/en-us/azure/container-apps/dapr-overview) 📚*MS-Learn*
   - [Dapr with .NET Aspire](https://learn.microsoft.com/en-us/dotnet/aspire/frameworks/dapr) 📚*MS-Learn*
