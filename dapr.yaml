@@ -7,4 +7,11 @@ apps:
 - appID: webapi
   appDirPath: ./DaprWebApi
   appPort: 7007
+  daprHTTPPort: 3510 # Optional, but it makes local tests easier
+  command: ["dotnet", "run"]
+- appID: echo-server
+  appDirPath: ./EchoWebApi
+  appPort: 7102
+  appProtocol: https
+  daprHTTPPort: 3511
   command: ["dotnet", "run"]
