@@ -23,8 +23,8 @@ public static class Program
 
             app.UseCloudEvents(); // Dapr will send serialized event object vs being raw CloudEvent
 
-            app.MapStateEndpoints();
             app.MapInvokeMethodEndpoints();
+            app.MapStateEndpoints();
             app.MapOrderPubSubEndpoints();
             app.MapOrderBindingEndpoints();
         }

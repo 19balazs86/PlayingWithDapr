@@ -17,10 +17,10 @@ public static class InvokeMethodEndpoints
         // You can create HttpClient to call the EchoWebApi endpoints
         // HttpClient httpClient = DaprClient.CreateInvokeHttpClient(_appId);
 
-        app.MapGet("/invoke-method", getEchoServer);
+        app.MapGet("/invoke-method", invokeEchoServer);
     }
 
-    private static async Task<EchoResponse> getEchoServer(DaprClient daprClient, CancellationToken ct)
+    private static async Task<EchoResponse> invokeEchoServer(DaprClient daprClient, CancellationToken ct)
     {
         HttpMethod httpMethod = _httpMethods[Random.Shared.Next(0, _httpMethods.Count)];
 
@@ -39,17 +39,8 @@ public static class InvokeMethodEndpoints
 
         return response;
     }
-}
 
-public sealed record EchoRequest(string Name, int Age);
+    public sealed record EchoRequest(string Name, int Age);
 
-public sealed class EchoResponse
-{
-    public required string Method { get; init; }
-
-    public required string Path { get; init; }
-
-    public required string QueryString { get; init; }
-
-    public required string Body { get; init; }
+    public sealed record EchoResponse(string Method, string Path, string QueryString, string Body);
 }
