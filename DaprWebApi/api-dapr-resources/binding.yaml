@@ -12,14 +12,8 @@ spec:
   - name: accountKey
     secretKeyRef:
       name: storage:accountKey
-  # - name: accountName
-  #   value: "devstoreaccount1"
-  # - name: accountKey
-  #   value: "Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw=="
   - name: queueName
     value: "order"
-  # - name: endpoint
-  #   value: "https://127.0.0.1:10001"
   - name: pollingInterval
     value: "10"
   - name: ttlInSeconds
