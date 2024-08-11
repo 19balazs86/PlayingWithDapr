@@ -1,4 +1,5 @@
 ﻿using Dapr.Client;
+using DaprWebApi.DTOs;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace DaprWebApi.Endpoints;
@@ -6,8 +7,6 @@ namespace DaprWebApi.Endpoints;
 // Example: https://github.com/dapr/quickstarts/tree/master/pub_sub/csharp/sdk
 public static class OrderPubSubEndpoints
 {
-    private static int _orderId = 0;
-
     private const string _pubSubName = "my-pub-sub";
     private const string _topicName  = "orders";
 
@@ -24,7 +23,7 @@ public static class OrderPubSubEndpoints
     // In production, other applications can access the pub-sub, publish messages, and subscribe to the topic.
     private static async Task publish(DaprClient daprClient)
     {
-        var order = new Order(Interlocked.Increment(ref _orderId), DateTime.UtcNow);
+        var order = Order.CreateNew();
 
         await daprClient.PublishEventAsync(_pubSubName, _topicName, order);
     }
@@ -39,10 +38,8 @@ public static class OrderPubSubEndpoints
         // Retries and dead-letter: https://docs.dapr.io/developing-applications/building-blocks/pubsub/pubsub-deadletter
         int statusCode = Random.Shared.NextDouble() <= 0.8 ? StatusCodes.Status200OK : StatusCodes.Status500InternalServerError;
 
-        logger.LogInformation("Checkout for Order #{id} | CreatedAt: {date} | StatusCode {code}", order.Id, order.CreatedAtUtc, statusCode);
+        logger.LogInformation("Checkout-PubSub for Order #{id} | CreatedAt: {date} | StatusCode {code}", order.Id, order.CreatedAtUtc, statusCode);
 
         return TypedResults.StatusCode(statusCode);
     }
-
-    public sealed record Order(int Id, DateTime CreatedAtUtc);
 }
