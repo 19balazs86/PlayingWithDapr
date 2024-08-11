@@ -24,6 +24,7 @@ public static class OrderBindingEndpoints
 
         await daprClient.InvokeBindingAsync(_bindingName, "create", order);
     }
+
     private static StatusCodeHttpResult checkout(Order order, ILogger<Order> logger)
     {
         // Simulate server error. Dapr will resend the storage queue message with visibilityTimeout
