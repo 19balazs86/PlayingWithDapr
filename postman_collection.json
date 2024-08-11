@@ -173,6 +173,56 @@
 			]
 		},
 		{
+			"name": "PubSub",
+			"item": [
+				{
+					"name": "Publish",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HostAddress}}/orders-pub-sub/publish",
+							"host": [
+								"{{HostAddress}}"
+							],
+							"path": [
+								"orders-pub-sub",
+								"publish"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Manual checkout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostAddress}}/orders-pub-sub/checkout",
+							"host": [
+								"{{HostAddress}}"
+							],
+							"path": [
+								"orders-pub-sub",
+								"checkout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Invoke method",
 			"request": {
 				"method": "GET",
