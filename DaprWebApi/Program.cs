@@ -26,6 +26,7 @@ public static class Program
             app.MapStateEndpoints();
             app.MapInvokeMethodEndpoints();
             app.MapOrderPubSubEndpoints();
+            app.MapOrderBindingEndpoints();
         }
 
         app.Run();

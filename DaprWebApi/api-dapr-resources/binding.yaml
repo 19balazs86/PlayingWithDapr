@@ -1,0 +1,38 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: order-binding
+spec:
+  type: bindings.azure.storagequeues
+  version: v1
+  metadata:
+  - name: accountName
+    secretKeyRef:
+      name: storage:accountName
+  - name: accountKey
+    secretKeyRef:
+      name: storage:accountKey
+  # - name: accountName
+  #   value: "devstoreaccount1"
+  # - name: accountKey
+  #   value: "Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw=="
+  - name: queueName
+    value: "order"
+  # - name: endpoint
+  #   value: "https://127.0.0.1:10001"
+  - name: pollingInterval
+    value: "10"
+  - name: ttlInSeconds
+    value: "120"
+  - name: decodeBase64
+    value: "false"
+  - name: encodeBase64
+    value: "false"
+  - name: visibilityTimeout
+    value: "30s"
+  - name: route
+    value: "/order-binding/checkout"
+  - name: direction
+    value: "input, output"
+auth:
+  secretStore: my-local-secret-store
