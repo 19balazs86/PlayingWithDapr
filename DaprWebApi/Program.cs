@@ -21,8 +21,11 @@ public static class Program
         {
             app.MapGet("/", () => "Hello DaprWebApi");
 
+            app.UseCloudEvents(); // Dapr will send serialized event object vs being raw CloudEvent
+
             app.MapStateEndpoints();
             app.MapInvokeMethodEndpoints();
+            app.MapOrderPubSubEndpoints();
         }
 
         app.Run();

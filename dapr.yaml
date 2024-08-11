@@ -1,16 +1,17 @@
 version: 1
 
-# By using the common section, all the components in the Resources folder are available to all applications
-# Consider creating a separate folder in DaprWebApi/DaprComponents and using the resourcesPaths property
+# By using the common section, all the components in the dapr-resources folder are available to all applications
+# Consider placing handle it individually like: DaprWebApi/api-dapr-resources
 common:
-  resourcesPath: ./dapr-resources
+  resourcesPath: ./common-resources
 
 apps:
 - appID: webapi
   appDirPath: ./DaprWebApi
   appPort: 7007
+  appProtocol: https
   daprHTTPPort: 3510 # Optional, but it makes local tests easier
-  # resourcesPaths: ["./DaprComponents"]
+  resourcesPaths: ["./api-dapr-resources"]
   command: ["dotnet", "run"]
 - appID: echo-server
   appDirPath: ./EchoWebApi
