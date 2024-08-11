@@ -3,7 +3,7 @@ version: 1
 # By using the common section, all the components in the Resources folder are available to all applications
 # Consider creating a separate folder in DaprWebApi/DaprComponents and using the resourcesPaths property
 common:
-  resourcesPath: ./Resources
+  resourcesPath: ./dapr-resources
 
 apps:
 - appID: webapi
