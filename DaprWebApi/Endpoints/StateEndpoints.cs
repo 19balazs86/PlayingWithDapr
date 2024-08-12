@@ -70,7 +70,7 @@ public static class StateEndpoints
         return isSaved ? "Saved" : "ETag does not math!";
     }
 
-    public sealed record StateObject(string Name, int Age);
+    private sealed record StateObject(string Name, int Age);
 
-    public sealed record ETagStateObject(string ETag, StateObject State);
+    private sealed record ETagStateObject(string ETag, StateObject State);
 }

@@ -40,7 +40,7 @@ public static class InvokeMethodEndpoints
         return response;
     }
 
-    public sealed record EchoRequest(string Name, int Age);
+    private sealed record EchoRequest(string Name, int Age);
 
-    public sealed record EchoResponse(string Method, string Path, string QueryString, string Body);
+    private sealed record EchoResponse(string Method, string Path, string QueryString, string Body);
 }
