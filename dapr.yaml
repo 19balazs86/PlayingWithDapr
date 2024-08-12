@@ -1,7 +1,7 @@
 version: 1
 
-# By using the common section, all the components in the dapr-resources folder are available to all applications
-# Consider placing handle it individually like: DaprWebApi/api-dapr-resources
+# By using the common section, all the components in the common-resources folder are available to all applications
+# Consider placing them individually by application: DaprWebApi/dapr-resources
 common:
   resourcesPath: ./common-resources
 
@@ -10,8 +10,8 @@ apps:
   appDirPath: ./DaprWebApi
   appPort: 7007
   appProtocol: https
-  daprHTTPPort: 3510 # Optional, but it makes local tests easier
-  resourcesPaths: ["./api-dapr-resources"]
+  daprHTTPPort: 3510 # Optional, but it makes local test easier, when you call the Dapr sidecar HTTP endpoint
+  resourcesPaths: ["./dapr-resources"]
   command: ["dotnet", "run"]
 - appID: echo-server
   appDirPath: ./EchoWebApi
