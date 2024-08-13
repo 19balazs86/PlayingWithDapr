@@ -1,0 +1,29 @@
+apiVersion: dapr.io/v1alpha1
+kind: Resiliency
+metadata:
+  name: my-invoke-echo-resiliency
+scopes: # Optional, but you can move this file to the common-resources folder and define scopes with the IDs of applications that call the echo-server with resiliency
+  - webapi
+
+spec:
+  policies:
+
+    retries:
+      retryForever:
+        policy: constant
+        duration: 2s
+        maxRetries: -1
+
+    circuitBreakers:
+      simpleCB:
+        maxRequests: 1
+        timeout: 5s
+        trip: consecutiveFailures >= 5
+
+  targets:
+    apps:
+      echo-server:
+        retry: retryForever
+        circuitBreaker: simpleCB
+
+# Resiliency: https://docs.dapr.io/operations/resiliency
