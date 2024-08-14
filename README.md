@@ -20,6 +20,7 @@ This repository contains several examples to test Dapr features.
   - [QuickStarts examples](https://docs.dapr.io/getting-started/quickstarts) 📓 | [with code](https://github.com/dapr/quickstarts) 👤*Quickstarts*
   - [Examples](https://github.com/dapr/dotnet-sdk/tree/master/examples) 👤*SDK*
 - eBook: [Dapr for .NET Developers](https://github.com/dotnet-architecture/eBooks/blob/1ed30275281b9060964fcb2a4c363fe7797fe3f3/current/dapr-for-net-developers/Dapr-for-NET-Developers.pdf) 👤*DotNET Architecture*
+- [Microservices with Dapr and Azure Container Apps](https://youtu.be/-LeCQvXka9Y) 📽️*1 hour - NDC Conf 2024* | [DaprShop](https://github.com/william-liebenberg/practical-dapr) 👤*William Liebenberg*
 - Other
   - [Azure Container Apps with Dapr overview](https://learn.microsoft.com/en-us/azure/container-apps/dapr-overview) 📚*MS-Learn*
   - [Dapr with .NET Aspire](https://learn.microsoft.com/en-us/dotnet/aspire/frameworks/dapr) 📚*MS-Learn*
