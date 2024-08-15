@@ -5,13 +5,13 @@ namespace DaprWebApi.Endpoints;
 
 // Examples:
 // - HTTP, gRPC, HttpClient: https://github.com/dapr/dotnet-sdk/tree/master/examples/Client/ServiceInvocation
-public static class InvokeMethodEndpoints
+public sealed class InvokeMethodEndpoints : IEndpoint
 {
     private static readonly ImmutableList<HttpMethod> _httpMethods = [HttpMethod.Get, HttpMethod.Post, HttpMethod.Put, HttpMethod.Delete];
 
     private const string _appId = "echo-server";
 
-    public static void MapInvokeMethodEndpoints(this IEndpointRouteBuilder app)
+    public void MapEndpoints(IEndpointRouteBuilder app)
     {
         // https://github.com/dapr/dotnet-sdk/blob/master/examples/Client/ServiceInvocation/InvokeServiceHttpClientExample.cs
         // You can create HttpClient to call the EchoWebApi endpoints

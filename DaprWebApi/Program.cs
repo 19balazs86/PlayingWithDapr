@@ -13,6 +13,8 @@ public static class Program
         // Add services to the container
         {
             services.AddDaprClient();
+
+            services.AddEndpoints(); // From: EndpointExtentions
         }
 
         WebApplication app = builder.Build();
@@ -26,10 +28,7 @@ public static class Program
             app.UseCloudEvents();
 
             // Map example endpoints
-            app.MapInvokeMethodEndpoints();
-            app.MapStateEndpoints();
-            app.MapOrderPubSubEndpoints();
-            app.MapOrderBindingEndpoints();
+            app.MapEndpoints(); // From: EndpointExtentions
         }
 
         app.Run();

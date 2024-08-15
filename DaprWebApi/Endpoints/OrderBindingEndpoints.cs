@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace DaprWebApi.Endpoints;
 
-public static class OrderBindingEndpoints
+public sealed class OrderBindingEndpoints : IEndpoint
 {
     private const string _bindingName = "order-binding";
 
-    public static void MapOrderBindingEndpoints(this IEndpointRouteBuilder app)
+    public void MapEndpoints(IEndpointRouteBuilder app)
     {
         // Endpoint based on the route in binding.yaml
         var group = app.MapGroup("/order-binding");
@@ -25,7 +25,7 @@ public static class OrderBindingEndpoints
         await daprClient.InvokeBindingAsync(_bindingName, "create", order);
     }
 
-    private static StatusCodeHttpResult checkout(Order order, ILogger<Order> logger)
+    private static StatusCodeHttpResult checkout(Order order, ILogger<OrderBindingEndpoints> logger)
     {
         // Simulate server error. Dapr will resend the storage queue message with visibilityTimeout
         int statusCode = Random.Shared.NextDouble() <= 0.8 ? StatusCodes.Status200OK : StatusCodes.Status500InternalServerError;
