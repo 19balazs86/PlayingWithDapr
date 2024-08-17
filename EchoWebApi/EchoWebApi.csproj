@@ -1,9 +1,26 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- https://learn.microsoft.com/en-us/dotnet/core/docker/publish-as-container -->
+    <!-- Short: dotnet publish /t:PublishContainer -->
+    <!-- Long:  dotnet publish -p PublishProfile=DefaultContainer -->
+
+    <IsPublishable>true</IsPublishable>
+    <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
+
+    <!--<ContainerRepository>echo-api</ContainerRepository>-->
+    <ContainerRepository>19balazs86/echo-api</ContainerRepository>
+    <ContainerImageTags>1.0;latest</ContainerImageTags>
+    <ContainerRuntimeIdentifier>linux-x64</ContainerRuntimeIdentifier>
+    <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0.8-noble-chiseled</ContainerBaseImage>
+    <!--<ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0.8-jammy-chiseled</ContainerBaseImage>-->
+
+    <!-- Uncomment it to push to Docker Hub -->
+    <!--<ContainerRegistry>docker.io</ContainerRegistry>-->
   </PropertyGroup>
 
 </Project>
