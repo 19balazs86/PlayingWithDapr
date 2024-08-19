@@ -3,6 +3,9 @@ param(
     [string] $ImageName = "19balazs86/dapr-api:latest"
 )
 
+# Manage revisions in Azure Container Apps
+# https://learn.microsoft.com/en-us/azure/container-apps/revisions-manage
+
 # This update makes a copy of the current container-app BUT only changes the image (also it triggers a new revision)
 
 az containerapp update `
@@ -12,3 +15,10 @@ az containerapp update `
 
 # It can make additional changes, see to the documentation
 # https://learn.microsoft.com/en-us/cli/azure/containerapp?view=azure-cli-latest#az-containerapp-update
+
+# Create a new revision based on the previous
+# It can be used as the 'az containerapp update'
+# az containerapp revision copy `
+#     --name "dapr-api" `
+#     --resource-group "ContainerAppDaprTest" `
+#     --image $ImageName
