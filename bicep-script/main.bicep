@@ -137,7 +137,7 @@ resource daprApiContainerApp 'Microsoft.App/containerApps@2024-03-01' = {
       containers: [
         {
           name: daprApiName
-          image: '19balazs86/dapr-api:1.4'
+          image: '19balazs86/dapr-api:latest'
           resources: {
             cpu: json('0.25')
             memory: '0.5Gi'
@@ -153,6 +153,16 @@ resource daprApiContainerApp 'Microsoft.App/containerApps@2024-03-01' = {
       scale: {
         minReplicas: 0
         maxReplicas: 2
+        rules: [
+          {
+            name: 'rule-http'
+            http: {
+              metadata:{
+                concurrentRequests: '15'
+              }
+            }
+          }
+        ]
       }
     }
   }
