@@ -6,6 +6,7 @@ This repository contains several examples to test Dapr features.
 - [StateEndpoints.cs](DaprWebApi/Endpoints/StateEndpoints.cs): for state management. Related file: [statestore.yaml](common-resources/statestore.yaml)
 - [OrderPubSubEndpoints.cs](DaprWebApi/Endpoints/OrderPubSubEndpoints.cs): for publish and receive messages. Related files: [pubsub.yaml](DaprWebApi/dapr-resources/pubsub.yaml) and [subscription.yaml](DaprWebApi/dapr-resources/subscription.yaml)
 - [OrderBindingEndpoints.cs](DaprWebApi/Endpoints/OrderBindingEndpoints.cs): for input and output binding using Azure Storage Queue. Related files: [binding.yaml](DaprWebApi/dapr-resources/binding.yaml) and [local-secret-store.yaml](DaprWebApi/dapr-resources/local-secret-store.yaml)
+- [CronJobEndpoints.cs](DaprWebApi/Endpoints/CronJobEndpoints.cs): handle the Cron binding triggered event as defined in the : [cron-job-binding.yaml](DaprWebApi/dapr-resources/cron-job-binding.yaml)
 
 ## Resources
 
