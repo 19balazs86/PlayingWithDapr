@@ -5,6 +5,7 @@ VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CA691D8E-6BC7-4DF8-8EA3-FA832FE874ED}"
 	ProjectSection(SolutionItems) = preProject
+		bicep-script\main.bicep = bicep-script\main.bicep
 		README.md = README.md
 		common-resources\statestore.yaml = common-resources\statestore.yaml
 	EndProjectSection
