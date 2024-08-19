@@ -3,10 +3,10 @@
 This repository contains several examples to test Dapr features.
 
 - [InvokeMethodEndpoints.cs](DaprWebApi/Endpoints/InvokeMethodEndpoints.cs): invoke the EchoWebApi, a resiliency is defined in [invoke-echo-resiliency.yaml](DaprWebApi/dapr-resources/invoke-echo-resiliency.yaml)
-- [StateEndpoints.cs](DaprWebApi/Endpoints/StateEndpoints.cs): for state management. Related file: [statestore.yaml](common-resources/statestore.yaml)
-- [OrderPubSubEndpoints.cs](DaprWebApi/Endpoints/OrderPubSubEndpoints.cs): for publish and receive messages. Related files: [pubsub.yaml](DaprWebApi/dapr-resources/pubsub.yaml) and [subscription.yaml](DaprWebApi/dapr-resources/subscription.yaml)
-- [OrderBindingEndpoints.cs](DaprWebApi/Endpoints/OrderBindingEndpoints.cs): for input and output binding using Azure Storage Queue. Related files: [binding.yaml](DaprWebApi/dapr-resources/binding.yaml) and [local-secret-store.yaml](DaprWebApi/dapr-resources/local-secret-store.yaml)
-- [CronJobEndpoints.cs](DaprWebApi/Endpoints/CronJobEndpoints.cs): handle the Cron binding triggered event as defined in the : [cron-job-binding.yaml](DaprWebApi/dapr-resources/cron-job-binding.yaml)
+- [StateEndpoints.cs](DaprWebApi/Endpoints/StateEndpoints.cs): state management, defined in [statestore.yaml](common-resources/statestore.yaml)
+- [OrderPubSubEndpoints.cs](DaprWebApi/Endpoints/OrderPubSubEndpoints.cs): publish and receive messages, defined in [pubsub.yaml](DaprWebApi/dapr-resources/pubsub.yaml) and [subscription.yaml](DaprWebApi/dapr-resources/subscription.yaml)
+- [OrderBindingEndpoints.cs](DaprWebApi/Endpoints/OrderBindingEndpoints.cs): input and output binding using Azure Storage Queue. [binding.yaml](DaprWebApi/dapr-resources/binding.yaml) and [local-secret-store.yaml](DaprWebApi/dapr-resources/local-secret-store.yaml)
+- [CronJobEndpoints.cs](DaprWebApi/Endpoints/CronJobEndpoints.cs): handle the Cron binding triggered event, defined in [cron-job-binding.yaml](DaprWebApi/dapr-resources/cron-job-binding.yaml)
 
 ## Resources
 
@@ -16,7 +16,7 @@ This repository contains several examples to test Dapr features.
     - [Dapr API](https://docs.dapr.io/reference/api)
     - [Component specs](https://docs.dapr.io/reference/components-reference)
     - [Dapr CLI](https://docs.dapr.io/reference/cli)
-  - [Multi-App Run](https://docs.dapr.io/developing-applications/local-development/multi-app-dapr-run) (with file: dapr.yaml)
+  - [Multi-App Run](https://docs.dapr.io/developing-applications/local-development/multi-app-dapr-run)
 - Examples
   - [QuickStarts examples](https://docs.dapr.io/getting-started/quickstarts) 📓 | [with code](https://github.com/dapr/quickstarts) 👤*Quickstarts*
   - [Examples](https://github.com/dapr/dotnet-sdk/tree/master/examples) 👤*SDK*
@@ -51,6 +51,6 @@ This repository contains several examples to test Dapr features.
 
 ## Infrastructure provisioning with a Bicep template
 
-You can find a [main.bicep](bicep-script/main.bicep) file that contains all the related objects for provisioning the infrastructure (Container Apps Environment, Storage account, Managed Identity, Container App, Dapr Components)
+You can find a [main.bicep](bicep-script/main.bicep) template file that contains all the related objects for provisioning the infrastructure (Container Apps Environment, Storage account, Managed Identity, Container App, Dapr Components)
 
 ![Bicep template](bicep-script/bicep-infrastructure.JPG)
