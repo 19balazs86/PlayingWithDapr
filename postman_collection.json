@@ -66,7 +66,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3510/v1.0/state/MyStateStore/test-key",
+							"raw": "http://localhost:3510/v1.0/state/my-state-store/test-key",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -75,8 +75,38 @@
 							"path": [
 								"v1.0",
 								"state",
-								"MyStateStore",
+								"my-state-store",
 								"test-key"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SaveState via Dapr",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"key\": \"test-key\",\r\n        \"value\": {\r\n            \"Name\": \"John Doe via Dapr\",\r\n            \"Age\": 10\r\n        }\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3510/v1.0/state/my-state-store",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3510",
+							"path": [
+								"v1.0",
+								"state",
+								"my-state-store"
 							]
 						}
 					},
