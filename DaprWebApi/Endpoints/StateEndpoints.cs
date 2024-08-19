@@ -8,7 +8,7 @@ namespace DaprWebApi.Endpoints;
 // - Transactions, ETags, Bulk: https://github.com/dapr/dotnet-sdk/tree/master/examples/Client/StateManagement
 public sealed class StateEndpoints : IEndpoint
 {
-    private const string _storeName = "MyStateStore";
+    private const string _storeName = "my-state-store";
     private const string _stateKey  = "test-key";
 
     private static readonly Dictionary<string, string> _metadata = new() { ["ttlInSeconds"] = "120" }; // TTL set to 2 minutes
