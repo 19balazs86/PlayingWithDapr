@@ -122,6 +122,7 @@ resource daprApiContainerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
     managedEnvironmentId: containerAppEnv.id
     configuration: {
+      maxInactiveRevisions: 5
       ingress: {
         external: true
         targetPort: 8080
