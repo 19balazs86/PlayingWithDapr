@@ -3,8 +3,17 @@ kind: Component
 metadata:
   name: my-pub-sub
 spec:
-  type: pubsub.redis
+  type: pubsub.in-memory
   version: v1
-  metadata:
-  - name: redisHost
-    value: 127.0.0.1:6379
+  metadata: []
+# --- Redis ---
+# apiVersion: dapr.io/v1alpha1
+# kind: Component
+# metadata:
+#   name: my-pub-sub
+# spec:
+#   type: pubsub.redis
+#   version: v1
+#   metadata:
+#   - name: redisHost
+#     value: 127.0.0.1:6379

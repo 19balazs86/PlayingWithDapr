@@ -32,7 +32,7 @@ This repository contains several examples to test Dapr features.
   - Option #2: `winget install Dapr.CLI`
 - Runtime: [Upgrade](https://docs.dapr.io/operations/hosting/self-hosted/self-hosted-upgrade) or install: [Dapr in self-hosted mode without Docker](https://docs.dapr.io/operations/hosting/self-hosted/self-hosted-no-docker) `dapr init --slim`
 - Dependencies
-  - Redis server: used in [statestore.yaml](common-resources/statestore.yaml) and [pubsub.yaml](DaprWebApi/dapr-resources/pubsub.yaml)
+  - Optional - Redis server: used in [statestore.yaml](common-resources/statestore.yaml) and [pubsub.yaml](DaprWebApi/dapr-resources/pubsub.yaml), but the default is in-memory for both
   - Azure storage account: used storage-queues in [binding.yaml](DaprWebApi/dapr-resources/binding.yaml)
 - Run the [dapr.yaml](dapr.yaml) file
   - Option #1: Using the Darp CLI: `dapr run -f .`
