@@ -47,3 +47,9 @@ This repository contains several examples to test Dapr features.
   }
 }
 ```
+
+## Infrastructure provisioning with a Bicep template
+
+You can find a [main.bicep](bicep-script/main.bicep) file that contains all the related objects for provisioning the infrastructure (Container Apps Environment, Storage account, Managed Identity, Container App, Dapr Components)
+
+![Bicep template](bicep-script/bicep-infrastructure.JPG)
