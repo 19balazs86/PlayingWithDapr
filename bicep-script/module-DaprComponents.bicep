@@ -10,6 +10,9 @@ resource containerAppEnv 'Microsoft.App/managedEnvironments@2024-03-01' existing
 // --> Dapr component: Bindings for Storage Queues
 // https://learn.microsoft.com/en-us/azure/templates/microsoft.app/connectedenvironments/daprcomponents
 
+// JSON definition of the daprComponent
+// az resource show --ids /subscriptions/<GUID>/resourceGroups/<ResGroupName>/providers/Microsoft.App/managedEnvironments/<ManagedEnvname>/daprComponents/<DaprComponentName>
+
 resource bindingQueueComponent 'Microsoft.App/managedEnvironments/daprComponents@2024-03-01' = {
   name: 'order-binding'
   parent: containerAppEnv
@@ -60,11 +63,17 @@ resource storageTableComponent 'Microsoft.App/managedEnvironments/daprComponents
       {
         name: 'azureClientId' // Azure-specific value, you can use the managed identity instead of the storage key
         value: userAssignedIdentityClientId
+        // secretRef: You can use this field in the same way in the module-ContainerApp-EchoServer.bicep by defining the secrets below
       }
       {
         name: 'tableName'
         value: 'state'
       }
     ]
+    // secrets: []
   }
 }
+
+// --> Dapr component: Azure Key Vault secret store
+// You can define it similarly to the other components, just enough to populate the vaultName and azureClientId metadata fields
+// https://docs.dapr.io/reference/components-reference/supported-secret-stores/azure-keyvault

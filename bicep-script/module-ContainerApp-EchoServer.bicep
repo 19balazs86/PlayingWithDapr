@@ -12,6 +12,7 @@ resource echoServerContainerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
     managedEnvironmentId: containerAppEnvId
     configuration: {
+      maxInactiveRevisions: 5
       ingress: {
         external: true
         targetPort: 8080
@@ -23,6 +24,19 @@ resource echoServerContainerApp 'Microsoft.App/containerApps@2024-03-01' = {
         appPort: 8080
         enableApiLogging: true
       }
+      secrets: [
+        {
+          name: 'simple-secret'
+          value: 'My simple secret value'
+        }
+        // {
+        //   name: 'kv-secret' // You can use it with secretRef in env variables
+        //   // You can find this URL by navigating to KV, selecting a secret, opening the current revision, and copying the value from the 'Secret Identifier' field
+        //   keyVaultUrl: 'https://KeyVaultName.vault.azure.net/secrets/MyConnectionString/cb6eb74f67434e6f83996e867e4f4c76'
+        //   // This is the userAssignedIdentity.id value
+        //   identity: '/subscriptions/<GUID>/resourcegroups/<ResGroupName>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<MyIdentityName>'
+        // }
+      ]
     }
     template: {
       containers: [
@@ -33,6 +47,12 @@ resource echoServerContainerApp 'Microsoft.App/containerApps@2024-03-01' = {
             cpu: json('0.25')
             memory: '0.5Gi'
           }
+          env: [
+            {
+              name: 'env-simple-secret'
+              secretRef: 'simple-secret'
+            }
+          ]
         }
       ]
       scale: {
