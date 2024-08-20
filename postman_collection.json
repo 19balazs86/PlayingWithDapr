@@ -377,6 +377,28 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Bulk-Secret via Dapr",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3510/v1.0/secrets/my-local-secret-store/bulk",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3510",
+							"path": [
+								"v1.0",
+								"secrets",
+								"my-local-secret-store",
+								"bulk"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
