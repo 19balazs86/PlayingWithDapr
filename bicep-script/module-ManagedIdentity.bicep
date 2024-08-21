@@ -36,7 +36,8 @@ resource roleAssignments 'Microsoft.Authorization/roleAssignments@2022-04-01' = 
   properties: {
     principalId: userAssignedIdentity.properties.principalId
     principalType: 'ServicePrincipal'
-    roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', roleDefinition.Id)
+    // roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', roleDefinition.Id) // You can use it, but preffered the subscriptionResourceId
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinition.Id)
   }
 }]
 
