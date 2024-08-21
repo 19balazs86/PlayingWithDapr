@@ -32,8 +32,8 @@ resource echoServerContainerApp 'Microsoft.App/containerApps@2024-03-01' = {
         // {
         //   name: 'kv-secret' // You can use it with secretRef in env variables
         //   // You can find this URL by navigating to KV, selecting a secret, opening the current revision, and copying the value from the 'Secret Identifier' field
-        //   keyVaultUrl: 'https://KeyVaultName.vault.azure.net/secrets/MyConnectionString/cb6eb74f67434e6f83996e867e4f4c76'
-        //   // This is the userAssignedIdentity.id value
+        //   keyVaultUrl: 'https://KeyVaultName.vault.azure.net/secrets/MyConnectionString/GUID'
+        //   // This is the userAssignedIdentity.id value (Resource ID)
         //   identity: '/subscriptions/<GUID>/resourcegroups/<ResGroupName>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<MyIdentityName>'
         // }
       ]
