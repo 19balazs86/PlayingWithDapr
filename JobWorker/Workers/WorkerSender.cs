@@ -10,14 +10,14 @@ public sealed class WorkerSender : BackgroundService
 
     private readonly QueueClient _queueClient;
 
-    private readonly QueueSettings _queueSettings;
+    private readonly WorkerSettings _queueSettings;
 
     private readonly IHostApplicationLifetime _hostApplicationLifetime;
 
     public WorkerSender(
         ILogger<WorkerSender> logger,
         QueueServiceClient queueServiceClient,
-        IOptions<QueueSettings> queueOptions,
+        IOptions<WorkerSettings> queueOptions,
         IHostApplicationLifetime hostApplicationLifetime)
     {
         _logger = logger;
@@ -37,11 +37,11 @@ public sealed class WorkerSender : BackgroundService
 
             await _queueClient.CreateIfNotExistsAsync();
 
-            WeatherForecast[] weatherForecasts = WeatherForecast.CreateMore(_queueSettings.SendNumberOfMessages).ToArray();
+            JobMessage[] jobMessages = JobMessage.CreateMore(_queueSettings.SendNumberOfMessages).ToArray();
 
-            foreach (WeatherForecast forecast in weatherForecasts)
+            for (int i = 0; i < _queueSettings.SendNumberOfMessages && !stoppingToken.IsCancellationRequested; i++)
             {
-                BinaryData message = BinaryData.FromObjectAsJson(forecast);
+                BinaryData message = BinaryData.FromObjectAsJson(jobMessages[i]);
 
                 await _queueClient.SendMessageAsync(message);
 
