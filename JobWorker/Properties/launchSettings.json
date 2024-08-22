@@ -6,7 +6,7 @@
       "dotnetRunMessages": true,
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development",
-        "DOTNET_UseAzurite": "true"
+        "DOTNET_UseLocalAzurite": "true"
       }
     },
     "Run-JobWorker": {
