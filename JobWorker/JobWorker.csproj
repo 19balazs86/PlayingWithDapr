@@ -4,6 +4,19 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- Short: dotnet publish -t:PublishContainer -->
+
+    <IsPublishable>true</IsPublishable>
+    <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
+
+    <!--<ContainerRepository>echo-api</ContainerRepository>-->
+    <ContainerRepository>19balazs86/job-worker</ContainerRepository>
+    <ContainerImageTags>1.0;latest</ContainerImageTags>
+    <ContainerRuntimeIdentifier>linux-x64</ContainerRuntimeIdentifier>
+    <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0.8-noble-chiseled</ContainerBaseImage>
+
+    <!--<ContainerRegistry>docker.io</ContainerRegistry>-->
   </PropertyGroup>
 
   <ItemGroup>
