@@ -31,29 +31,33 @@ public sealed class WorkerSender : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        await _queueClient.CreateIfNotExistsAsync();
-
-        WeatherForecast[] weatherForecasts = WeatherForecast.CreateMore(_queueSettings.SendNumberOfMessages).ToArray();
-
-        _logger.LogInformation("Sending {number} messages", _queueSettings.SendNumberOfMessages);
-
-        foreach (WeatherForecast forecast in weatherForecasts)
+        try
         {
-            BinaryData message = BinaryData.FromObjectAsJson(forecast);
+            _logger.LogInformation("Sending {number} messages", _queueSettings.SendNumberOfMessages);
 
-            await _queueClient.SendMessageAsync(message);
+            await _queueClient.CreateIfNotExistsAsync();
 
-            await Task.Delay(500);
+            WeatherForecast[] weatherForecasts = WeatherForecast.CreateMore(_queueSettings.SendNumberOfMessages).ToArray();
 
-            if (stoppingToken.IsCancellationRequested)
+            foreach (WeatherForecast forecast in weatherForecasts)
             {
-                break;
+                BinaryData message = BinaryData.FromObjectAsJson(forecast);
+
+                await _queueClient.SendMessageAsync(message);
+
+                await Task.Delay(500);
             }
+
+            _logger.LogInformation("Messages are sent");
         }
-
-        _logger.LogInformation("{number} messages are sent", _queueSettings.SendNumberOfMessages);
-
-        // Stop the application as it meant to be a Container App Job
-        _hostApplicationLifetime.StopApplication();
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to send messages");
+        }
+        finally
+        {
+            // Stop the application as it meant to be a Container App Job
+            _hostApplicationLifetime.StopApplication();
+        }
     }
 }
