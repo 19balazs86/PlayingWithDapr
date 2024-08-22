@@ -28,18 +28,25 @@ public static class Program
 
             services.AddAzureClients(clients =>
             {
-                // Role assignment: "Storage Queue Data Contributor"
-                // Instead of the full connection string, use the DefaultAzureCredential, as the service has a UserAssigned identity
-                clients.AddQueueServiceClient(queueSettings.QueueEndpointUri);
+                if (builder.Configuration.GetValue<bool>("UseAzurite"))
+                {
+                    clients.AddQueueServiceClient("UseDevelopmentStorage=true");
+                }
+                else
+                {
+                    // Role assignment: "Storage Queue Data Contributor"
+                    // Instead of the full connection string, use the DefaultAzureCredential, as the service has a UserAssigned identity
+                    clients.AddQueueServiceClient(queueSettings.QueueEndpointUri);
 
-                // I am experiencing an issue when using DefaultAzureCredential on my machine.
-                // However, it works fine when I create a QueueClient with DefaultAzureCredential directly.
-                // This issue only occurs when I use services.AddAzureClients
-                TokenCredential tokenCredential = builder.Environment.IsDevelopment() ?
-                    new AzureCliCredential() :
-                    new DefaultAzureCredential();
+                    // I am experiencing an issue when using DefaultAzureCredential on my machine.
+                    // However, it works fine when I create a QueueClient with DefaultAzureCredential directly.
+                    // This issue only occurs when I use services.AddAzureClients
+                    TokenCredential tokenCredential = builder.Environment.IsDevelopment() ?
+                        new AzureCliCredential() :
+                        new DefaultAzureCredential();
 
-                clients.UseCredential(tokenCredential);
+                    clients.UseCredential(tokenCredential);
+                }
             });
         }
 

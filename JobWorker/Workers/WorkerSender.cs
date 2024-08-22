@@ -33,22 +33,30 @@ public sealed class WorkerSender : BackgroundService
     {
         try
         {
-            _logger.LogInformation("Sending {number} messages", _queueSettings.SendNumberOfMessages);
-
             await _queueClient.CreateIfNotExistsAsync();
 
-            JobMessage[] jobMessages = JobMessage.CreateMore(_queueSettings.SendNumberOfMessages).ToArray();
-
-            for (int i = 0; i < _queueSettings.SendNumberOfMessages && !stoppingToken.IsCancellationRequested; i++)
+            do
             {
-                BinaryData message = BinaryData.FromObjectAsJson(jobMessages[i]);
+                _logger.LogInformation("Sending {number} messages", _queueSettings.SendNumberOfMessages);
 
-                await _queueClient.SendMessageAsync(message);
+                JobMessage[] jobMessages = JobMessage.CreateMore(_queueSettings.SendNumberOfMessages).ToArray();
 
-                await Task.Delay(500);
-            }
+                for (int i = 0; i < _queueSettings.SendNumberOfMessages && !stoppingToken.IsCancellationRequested; i++)
+                {
+                    BinaryData message = BinaryData.FromObjectAsJson(jobMessages[i]);
 
-            _logger.LogInformation("Messages are sent");
+                    await _queueClient.SendMessageAsync(message);
+
+                    await Task.Delay(500);
+                }
+
+                _logger.LogInformation("Messages are sent");
+
+                if (_queueSettings.IsLongRunningApp)
+                {
+                    await Task.WhenAny(Task.Delay(5_000, stoppingToken));
+                }
+            } while (_queueSettings.IsLongRunningApp && !stoppingToken.IsCancellationRequested); // Make it long running
         }
         catch (Exception ex)
         {
@@ -56,7 +64,6 @@ public sealed class WorkerSender : BackgroundService
         }
         finally
         {
-            // Stop the application as it meant to be a Container App Job
             _hostApplicationLifetime.StopApplication();
         }
     }

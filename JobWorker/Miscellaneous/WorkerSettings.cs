@@ -10,4 +10,5 @@ public sealed class WorkerSettings : IConfigOptions
     public required int SendNumberOfMessages { get; init; }
 
     public Uri QueueEndpointUri => new Uri(QueueEndpointUrl);
+    public bool IsLongRunningApp => !IsShortRunningJob;
 }

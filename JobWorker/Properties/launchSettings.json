@@ -1,6 +1,14 @@
 ﻿{
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
+    "Run-For-Azurite": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development",
+        "DOTNET_UseAzurite": "true"
+      }
+    },
     "Run-JobWorker": {
       "commandName": "Project",
       "dotnetRunMessages": true,
