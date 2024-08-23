@@ -56,7 +56,7 @@ public sealed class WorkerSender : BackgroundService
                 {
                     await Task.WhenAny(Task.Delay(5_000, stoppingToken));
                 }
-            } while (_queueSettings.IsLongRunningApp && !stoppingToken.IsCancellationRequested); // Make it long running
+            } while (_queueSettings.IsLongRunningApp && !stoppingToken.IsCancellationRequested);
         }
         catch (Exception ex)
         {

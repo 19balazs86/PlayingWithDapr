@@ -7,11 +7,11 @@ using Microsoft.Extensions.Azure;
 namespace JobWorker;
 
 /*
-* This worker service is responsible for sending and receiving messages from the Storage Queue
+* This worker service is responsible for sending and receiving messages from a Storage Queue
 *
 * Based on the value of IsShortRunningJob in the settings
 * - True:  It could be a Container Job
-* - False: It could be a long-running Container App with a scale rule of 0-X
+* - False: It could be a long-running Container App with a scale rule
 */
 public static class Program
 {
@@ -30,7 +30,7 @@ public static class Program
             {
                 if (builder.Configuration.GetValue<bool>("UseLocalAzurite"))
                 {
-                    clients.AddQueueServiceClient("UseDevelopmentStorage=true");
+                    clients.AddQueueServiceClient(connectionString: "UseDevelopmentStorage=true");
                 }
                 else
                 {
@@ -39,10 +39,10 @@ public static class Program
                     clients.AddQueueServiceClient(queueSettings.QueueEndpointUri);
 
                     // I am experiencing an issue when using DefaultAzureCredential on my machine
-                    // However, it works fine when I manually create a QueueClient
+                    // However, it works fine when I manually create a QueueServiceClient or QueueClient passing them the DefaultAzureCredential
                     // This issue only occurs when I use services.AddAzureClients and QueueServiceClient.GetQueueClient
                     TokenCredential tokenCredential = builder.Environment.IsDevelopment() ?
-                        new AzureCliCredential() :
+                        new DefaultAzureCredential(_credentialOptions) :
                         new DefaultAzureCredential();
 
                     clients.UseCredential(tokenCredential);
@@ -54,4 +54,11 @@ public static class Program
 
         host.Run();
     }
+
+    private readonly static DefaultAzureCredentialOptions _credentialOptions = new DefaultAzureCredentialOptions
+    {
+        ExcludeEnvironmentCredential      = true,
+        ExcludeWorkloadIdentityCredential = true,
+        ExcludeManagedIdentityCredential  = true,
+    };
 }
