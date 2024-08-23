@@ -19,12 +19,12 @@ public static class Program
     {
         var builder = Host.CreateApplicationBuilder(args);
 
-        WorkerSettings queueSettings = builder.ConfigureAndReturn<WorkerSettings>()!;
+        WorkerSettings workerSettings = builder.ConfigureAndReturn<WorkerSettings>()!;
         IServiceCollection services = builder.Services;
 
         // Add services to the container
         {
-            services.AddHostedService<WorkerSender>();
+            services.addWorker_Sender_or_Receiver(workerSettings);
 
             services.AddAzureClients(clients =>
             {
@@ -36,7 +36,7 @@ public static class Program
                 {
                     // Role assignment: "Storage Queue Data Contributor"
                     // Instead of the full connection string, use the DefaultAzureCredential, as the service has a UserAssigned identity
-                    clients.AddQueueServiceClient(queueSettings.QueueEndpointUri);
+                    clients.AddQueueServiceClient(workerSettings.QueueEndpointUri);
 
                     // I am experiencing an issue when using DefaultAzureCredential on my machine
                     // However, it works fine when I manually create a QueueServiceClient or QueueClient passing them the DefaultAzureCredential
@@ -53,6 +53,18 @@ public static class Program
         IHost host = builder.Build();
 
         host.Run();
+    }
+
+    private static void addWorker_Sender_or_Receiver(this IServiceCollection services, WorkerSettings workerSettings)
+    {
+        if (workerSettings.SendNumberOfMessages > 0)
+        {
+            services.AddHostedService<WorkerSender>();
+        }
+        else
+        {
+            services.AddHostedService<WorkerReceiver>();
+        }
     }
 
     private readonly static DefaultAzureCredentialOptions _credentialOptions = new DefaultAzureCredentialOptions
