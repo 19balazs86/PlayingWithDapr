@@ -20,7 +20,8 @@ public static class Program
         var builder = Host.CreateApplicationBuilder(args);
 
         WorkerSettings workerSettings = builder.ConfigureAndReturn<WorkerSettings>()!;
-        IServiceCollection services = builder.Services;
+        IServiceCollection services   = builder.Services;
+        IConfiguration configuration  = builder.Configuration;
 
         // Add services to the container
         {
@@ -28,9 +29,9 @@ public static class Program
 
             services.AddAzureClients(clients =>
             {
-                if (builder.Configuration.GetValue<bool>("UseLocalAzurite"))
+                if (builder.Configuration.GetValue<bool>("UseConnString"))
                 {
-                    clients.AddQueueServiceClient(connectionString: "UseDevelopmentStorage=true");
+                    clients.AddQueueServiceClient(configuration.GetConnectionString("StorageAccount"));
                 }
                 else
                 {

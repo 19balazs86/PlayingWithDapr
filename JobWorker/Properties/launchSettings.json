@@ -1,12 +1,12 @@
 ﻿{
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "Run-For-Azurite": {
+    "Run-With-ConnString": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development",
-        "DOTNET_UseLocalAzurite": "true"
+        "DOTNET_UseConnString": "true"
       }
     },
     "Run-JobWorker": {

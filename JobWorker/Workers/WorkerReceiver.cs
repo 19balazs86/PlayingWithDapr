@@ -18,7 +18,7 @@ public sealed class WorkerReceiver : WorkerBase
 
     protected override async Task doWorkAsync(CancellationToken stoppingToken)
     {
-        QueueMessage[] queueMessages = [];
+        QueueMessage[] queueMessages;
 
         do
         {
