@@ -25,6 +25,7 @@ resource userAssignedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@
 // - Examples with trigger types: https://learn.microsoft.com/en-us/azure/container-apps/jobs
 // - Example: https://learn.microsoft.com/en-us/azure/container-apps/tutorial-event-driven-jobs
 // - Scaling rules docs: https://learn.microsoft.com/en-us/azure/container-apps/scale-app
+// - Keda scaler: https://keda.sh/docs/2.15/scalers/azure-storage-queue
 
 resource containerJob 'Microsoft.App/jobs@2024-03-01' = {
   name: 'job-queue-receiver'
@@ -48,12 +49,12 @@ resource containerJob 'Microsoft.App/jobs@2024-03-01' = {
         }
       ]
       eventTriggerConfig: {
-        parallelism: 1 // Number of parallel replicas of a job that can run in an execution
+        parallelism: 1 // Number of parallel replicas in a job execution
         replicaCompletionCount: 1
         scale: {
           minExecutions: 0
-          // The receiver processes messages until the queue is empty. Therefore, the maxExecutions value can be set to 1
-          // However, based on the metadata.queueLength value, multiple executions can process messages faster
+          // Allowing more executions at the same time can process messages faster
+          // This is determined by: NumberOfMessagesInTheQueue / metadata.queueLength
           maxExecutions: 1
           pollingInterval: 30 // seconds
           rules: [
@@ -61,7 +62,7 @@ resource containerJob 'Microsoft.App/jobs@2024-03-01' = {
               name: 'queue-scaling-rule'
               type: 'azure-queue'
               auth: [
-                {
+                { // Currently, the latest template does not support auth via ManagedIdentity, need to use the con-string
                   secretRef: 'secret-storage-conn-string'
                   triggerParameter: 'connection'
                 }

@@ -23,7 +23,8 @@ public sealed class WorkerReceiver : WorkerBase
         do
         {
             // QueueProperties queueProperties = await _queueClient.GetPropertiesAsync(); // ApproximateMessagesCount property can be used for something
-            // QueueMessage? jobMessage = await _queueClient.ReceiveMessageAsync();
+            // QueueMessage? queueMessage = await _queueClient.ReceiveMessageAsync();
+            // PeekedMessage? peekedMessage = await _queueClient.PeekMessageAsync(); // Retrieves a message but does not alter the visibility
 
             // When the message is received, it is assigned a visibility timeout.
             // Giving us that time to process it before it becomes visible again and can be retrieved by other consumers
