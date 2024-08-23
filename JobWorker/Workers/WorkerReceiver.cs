@@ -5,79 +5,44 @@ using Microsoft.Extensions.Options;
 
 namespace JobWorker.Workers;
 
-public sealed class WorkerReceiver : BackgroundService
+public sealed class WorkerReceiver : WorkerBase
 {
-    private readonly ILogger<WorkerReceiver> _logger;
-
-    private readonly QueueClient _queueClient;
-
-    private readonly WorkerSettings _queueSettings;
-
-    private readonly IHostApplicationLifetime _hostApplicationLifetime;
-
     public WorkerReceiver(
         ILogger<WorkerReceiver> logger,
         QueueServiceClient queueServiceClient,
-        IOptions<WorkerSettings> queueOptions,
-        IHostApplicationLifetime hostApplicationLifetime)
+        IOptions<WorkerSettings> workerOptions,
+        IHostApplicationLifetime hostApplicationLifetime) : base(logger, queueServiceClient, workerOptions.Value, hostApplicationLifetime)
     {
-        _logger = logger;
 
-        _queueSettings = queueOptions.Value;
-
-        _queueClient = queueServiceClient.GetQueueClient(_queueSettings.JobQueueName);
-
-        _hostApplicationLifetime = hostApplicationLifetime;
     }
 
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    protected override async Task doWorkAsync(CancellationToken stoppingToken)
     {
-        try
+        QueueMessage[] queueMessages = [];
+
+        do
         {
-            await _queueClient.CreateIfNotExistsAsync();
-
-            _logger.LogInformation("Start receiving messages");
-
             // QueueProperties queueProperties = await _queueClient.GetPropertiesAsync(); // ApproximateMessagesCount property can be used for something
             // QueueMessage? jobMessage = await _queueClient.ReceiveMessageAsync();
 
-            do
+            // When the message is received, it is assigned a visibility timeout.
+            // Giving us that time to process it before it becomes visible again and can be retrieved by other consumers
+            queueMessages = await _queueClient.ReceiveMessagesAsync(maxMessages: 2, visibilityTimeout: TimeSpan.FromSeconds(30), stoppingToken);
+
+            _logger.LogInformation("{number} messages have been received", queueMessages.Length);
+
+            foreach (QueueMessage queueMessage in queueMessages)
             {
-                QueueMessage[] queueMessages = [];
+                JobMessage jobMessage = queueMessage.Body.ToObjectFromJson<JobMessage>();
 
-                do
-                {
-                    // When the message is received, it is assigned a visibility timeout.
-                    // Giving us that time to process it before it becomes visible again and can be retrieved by other consumers
-                    queueMessages = await _queueClient.ReceiveMessagesAsync(maxMessages: 2, visibilityTimeout: TimeSpan.FromSeconds(30), stoppingToken);
+                _logger.LogInformation("Processing: '{message}'", jobMessage);
 
-                    foreach (QueueMessage queueMessage in queueMessages)
-                    {
-                        JobMessage jobMessage = queueMessage.Body.ToObjectFromJson<JobMessage>();
+                await Task.Delay(500); // Process it
 
-                        _logger.LogInformation("Processing: '{message}'", jobMessage);
-
-                        await Task.Delay(500); // Process it
-
-                        // After the message is processed, it can be deleted
-                        await _queueClient.DeleteMessageAsync(queueMessage.MessageId, queueMessage.PopReceipt, stoppingToken);
-                    }
-                }
-                while (queueMessages.Length > 0);
-
-                if (_queueSettings.IsLongRunningApp)
-                {
-                    await Task.WhenAny(Task.Delay(5_000, stoppingToken));
-                }
-            } while (_queueSettings.IsLongRunningApp && !stoppingToken.IsCancellationRequested);
+                // After the message is processed, it can be deleted
+                await _queueClient.DeleteMessageAsync(queueMessage.MessageId, queueMessage.PopReceipt, stoppingToken);
+            }
         }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Something went wrong");
-        }
-        finally
-        {
-            _hostApplicationLifetime.StopApplication();
-        }
+        while (queueMessages.Length > 0);
     }
 }
