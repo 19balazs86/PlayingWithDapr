@@ -1,13 +1,8 @@
 param appName string
+#disable-next-line secure-secrets-in-params
+param connStringSecretIdentifier string
 
 var rgLocation = resourceGroup().location
-
-// --> Existing: Storage Account
-resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
-  name: toLower(appName)
-}
-
-var storageAccountConnectionString = 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};AccountKey=${storageAccount.listKeys().keys[0].value};EndpointSuffix=${environment().suffixes.storage}'
 
 // --> Existing: Managed Environment
 resource containerAppEnv 'Microsoft.App/managedEnvironments@2024-03-01' existing = {
@@ -45,7 +40,8 @@ resource containerJob 'Microsoft.App/jobs@2024-03-01' = {
       secrets: [
         {
           name: 'secret-storage-conn-string'
-          value: storageAccountConnectionString
+          keyVaultUrl: connStringSecretIdentifier
+          identity: userAssignedIdentity.id
         }
       ]
       eventTriggerConfig: {
@@ -61,14 +57,15 @@ resource containerJob 'Microsoft.App/jobs@2024-03-01' = {
             {
               name: 'queue-scaling-rule'
               type: 'azure-queue'
+              // identity: was removed in the latest template, it does not support auth via ManagedIdentity, need to use the con-string
               auth: [
-                { // Currently, the latest template does not support auth via ManagedIdentity, need to use the con-string
+                {
                   secretRef: 'secret-storage-conn-string'
                   triggerParameter: 'connection'
                 }
               ]
               metadata: {
-                accountName: storageAccount.name
+                accountName: toLower(appName) // Storage Account name
                 queueLength: '5'
                 queueName: 'job-queue'
               }
