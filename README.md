@@ -1,12 +1,25 @@
-# Playing with Dapr
+# Playing with Dapr and Container Apps
 
 This repository contains several examples to test Dapr features.
+
+## Projects in the solution
+
+#### `DaprWebApi`
 
 - [InvokeMethodEndpoints.cs](DaprWebApi/Endpoints/InvokeMethodEndpoints.cs): invoke the EchoWebApi, a resiliency is defined in [invoke-echo-resiliency.yaml](DaprWebApi/dapr-resources/invoke-echo-resiliency.yaml)
 - [StateEndpoints.cs](DaprWebApi/Endpoints/StateEndpoints.cs): state management, defined in [statestore.yaml](common-resources/statestore.yaml)
 - [OrderPubSubEndpoints.cs](DaprWebApi/Endpoints/OrderPubSubEndpoints.cs): publish and receive messages, defined in [pubsub.yaml](DaprWebApi/dapr-resources/pubsub.yaml) and [subscription.yaml](DaprWebApi/dapr-resources/subscription.yaml)
 - [OrderBindingEndpoints.cs](DaprWebApi/Endpoints/OrderBindingEndpoints.cs): input and output binding using Azure Storage Queue. [binding.yaml](DaprWebApi/dapr-resources/binding.yaml) and [local-secret-store.yaml](DaprWebApi/dapr-resources/local-secret-store.yaml)
 - [CronJobEndpoints.cs](DaprWebApi/Endpoints/CronJobEndpoints.cs): handle the Cron binding triggered event, defined in [cron-job-binding.yaml](DaprWebApi/dapr-resources/cron-job-binding.yaml)
+
+#### `EchoWebApi`
+
+- Just a simple Web API that echoes back the request details in a JSON response
+
+#### `JobWorker`
+
+- This is a worker service responsible for sending and receiving messages from a Storage Queue
+- Based on the configuration, it can either be a short-running Container-Job or a long-running Container-App (scaling rule can be applied)
 
 ## Resources
 
@@ -51,6 +64,15 @@ This repository contains several examples to test Dapr features.
 
 ## Infrastructure provisioning with a Bicep template
 
-You can find a [main.bicep](bicep-script/main.bicep) template file that contains all the related objects for provisioning the infrastructure (Container Apps Environment, Storage account, Managed Identity, Container App, Dapr Components)
+#### `DaprWebApi and EchoWebApi`
+
+- You can find a [main.bicep](bicep-script/main.bicep) template file that contains all the related objects for provisioning the infrastructure
+- Container Apps Environment, Storage account, Managed Identity, Container App, Dapr Components
 
 ![Bicep template](bicep-script/bicep-infrastructure.JPG)
+
+#### `JobWorker`
+
+- This is a continuation of the previous template with the [main-job.bicep](JobWorker/bicep-script/main-job.bicep) file
+- KeyVault with a secret holding the Storage Account connection string
+- Jobs: Queue Sender (trigger: Manual) | Queue Receiver (trigger: Event)
