@@ -21,6 +21,7 @@ resource userAssignedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@
 // - Example: https://learn.microsoft.com/en-us/azure/container-apps/tutorial-event-driven-jobs
 // - Scaling rules docs: https://learn.microsoft.com/en-us/azure/container-apps/scale-app
 // - Keda scaler: https://keda.sh/docs/2.15/scalers/azure-storage-queue
+// - Sample project: https://github.com/Azure-Samples/container-apps-jobs
 
 resource containerJob 'Microsoft.App/jobs@2024-03-01' = {
   name: 'job-queue-receiver'
