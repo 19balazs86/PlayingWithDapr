@@ -3,7 +3,6 @@ param azureUserObjectID string
 
 // var rgLocation = resourceGroup().location
 
-
 // --> Module: KeyVault
 module moduleKeyVault 'module-KeyVault.bicep' = {
   name: 'Main-JobKeyVault'

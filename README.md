@@ -1,6 +1,13 @@
 # Playing with Dapr and Container Apps
 
-This repository contains several examples to test Dapr features.
+This repository contains various examples for testing Dapr features both locally and with Azure Container Apps.
+
+## Table of content
+
+- [Projects in the solution](#projects-in-the-solution)
+- [Resources](#resources)
+- [Prerequisites](#prerequisites)
+- [Infrastructure provisioning](#infrastructure-provisioning-with-a-bicep-template)
 
 ## Projects in the solution
 
