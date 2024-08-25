@@ -5,6 +5,10 @@ namespace DaprWebApi.Endpoints;
 
 // Examples:
 // - HTTP, gRPC, HttpClient: https://github.com/dapr/dotnet-sdk/tree/master/examples/Client/ServiceInvocation
+
+// In Container App, you can call other apps, not just using Dapr
+// Description: https://learn.microsoft.com/en-us/azure/container-apps/connect-apps
+
 public sealed class InvokeMethodEndpoints : IEndpoint
 {
     private static readonly ImmutableList<HttpMethod> _httpMethods = [HttpMethod.Get, HttpMethod.Post, HttpMethod.Put, HttpMethod.Delete];

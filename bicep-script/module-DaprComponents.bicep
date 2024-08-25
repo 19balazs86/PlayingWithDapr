@@ -8,10 +8,17 @@ resource containerAppEnv 'Microsoft.App/managedEnvironments@2024-03-01' existing
 }
 
 // --> Dapr component: Bindings for Storage Queues
-// https://learn.microsoft.com/en-us/azure/templates/microsoft.app/connectedenvironments/daprcomponents
+// Bicep: https://learn.microsoft.com/en-us/azure/templates/microsoft.app/connectedenvironments/daprcomponents
 
-// JSON definition of the daprComponent
+// Get the JSON definition of the component
 // az resource show --ids /subscriptions/<GUID>/resourceGroups/<ResGroupName>/providers/Microsoft.App/managedEnvironments/<ManagedEnvname>/daprComponents/<DaprComponentName>
+
+// Aside from Dapr Components, there is another way in Azure to connect services to the application
+// Service Connector (preview) is a general solution for other services as well (Azure Functions, App Services)
+// - Documentation: https://learn.microsoft.com/en-us/azure/service-connector/overview
+// - Example in Container App: https://learn.microsoft.com/en-us/azure/container-apps/service-connector
+// - Bicep: https://learn.microsoft.com/en-us/azure/templates/microsoft.servicelinker/linkers
+// Note: Currently, I prefer the Dapr Components
 
 resource bindingQueueComponent 'Microsoft.App/managedEnvironments/daprComponents@2024-03-01' = {
   name: 'order-binding'

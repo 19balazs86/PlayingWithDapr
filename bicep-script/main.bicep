@@ -34,7 +34,7 @@ resource containerAppEnv 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: appName
   location: rgLocation
   properties: {
-    // This value must be null configure Monitoring / OTel endpoints in Azure Portal
+    // In order to configure Monitoring / OTel endpoints in Azure Portal, this value must be null
     daprAIConnectionString: null
     appLogsConfiguration: {
       destination: 'log-analytics'
@@ -46,7 +46,7 @@ resource containerAppEnv 'Microsoft.App/managedEnvironments@2024-03-01' = {
     // https://learn.microsoft.com/en-us/azure/container-apps/opentelemetry-agents
     // I could not set the Monitoring / OTel endpoints with the Bicep script, because the latest version does not have it
     // appInsightsConfiguration: {
-    //   connectionString: applicationInsights.properties.ConnectionString
+    //   connectionString: moduleAppInsights.outputs.appInsights_ConnectionString
     // }
     // openTelemetryConfiguration: {
     //   tracesConfiguration: {
