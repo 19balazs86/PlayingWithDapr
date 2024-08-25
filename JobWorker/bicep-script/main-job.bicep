@@ -3,6 +3,14 @@ param azureUserObjectID string
 
 // var rgLocation = resourceGroup().location
 
+// --> Module: Create 'job-queue'
+module moduleCreateQueue 'module-CreateJobQueue.bicep' = {
+  name: 'Main-JobCreateQueue'
+  params: {
+    appName: appName
+  }
+}
+
 // --> Module: KeyVault
 module moduleKeyVault 'module-KeyVault.bicep' = {
   name: 'Main-JobKeyVault'
