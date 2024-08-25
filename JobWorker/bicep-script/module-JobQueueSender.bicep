@@ -1,4 +1,5 @@
 param appName string
+param cronExpression string = ''
 
 var rgLocation = resourceGroup().location
 
@@ -10,14 +11,14 @@ resource userAssignedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@
   name: appName
 }
 
-// --> Container Job: Queue-sender (Trigger: Manual)
+// --> Container Job: Queue-sender (Trigger: Manual or Schedule)
 
 // - Bicep template: https://learn.microsoft.com/en-us/azure/templates/microsoft.app/jobs
 // - Examples with trigger types: https://learn.microsoft.com/en-us/azure/container-apps/jobs
 // - Example: https://learn.microsoft.com/en-us/azure/container-apps/tutorial-event-driven-jobs
 
 resource containerJob 'Microsoft.App/jobs@2024-03-01' = {
-  name: 'job-queue-sender-manual'
+  name: 'job-queue-sender'
   location: rgLocation
   identity: {
     type: 'UserAssigned'
@@ -28,10 +29,15 @@ resource containerJob 'Microsoft.App/jobs@2024-03-01' = {
   properties: {
     environmentId: containerAppEnv.id
     configuration: {
-      triggerType: 'Manual'
+      triggerType: cronExpression == '' ? 'Manual' : 'Schedule'
       replicaTimeout: 90 // seconds
       replicaRetryLimit: 0
-      manualTriggerConfig: {
+      manualTriggerConfig: cronExpression != '' ? null : {
+        parallelism: 1
+        replicaCompletionCount: 1
+      }
+      scheduleTriggerConfig: cronExpression == '' ? null : {
+        cronExpression: cronExpression
         parallelism: 1
         replicaCompletionCount: 1
       }

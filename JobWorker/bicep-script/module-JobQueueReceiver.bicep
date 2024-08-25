@@ -53,7 +53,7 @@ resource containerJob 'Microsoft.App/jobs@2024-03-01' = {
           // Allowing more executions at the same time can process messages faster
           // This is determined by: NumberOfMessagesInTheQueue / metadata.queueLength
           maxExecutions: 1
-          pollingInterval: 30 // seconds
+          pollingInterval: 60 // seconds
           rules: [
             {
               name: 'queue-scaling-rule'

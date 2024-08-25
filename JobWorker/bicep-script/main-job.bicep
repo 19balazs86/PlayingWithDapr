@@ -25,6 +25,7 @@ module moduleJobQueueSender 'module-JobQueueSender.bicep' = {
   name: 'Main-JobQueueSender'
   params: {
     appName: appName
+    // cronExpression: '*/5 * * * *' // Every 5 minutes | Optional parameter: If not defined, any cron expression will result in a 'Manul' job
   }
 }
 
