@@ -4,6 +4,7 @@
 
 // There is also a Job scheduling API, currently in alpha, I could not find any related methods in DaprClient
 // https://docs.dapr.io/developing-applications/building-blocks/jobs/jobs-overview
+// Job introduction with HTTP calls: https://youtu.be/1Mnl7Dlo6Bo?t=120
 public sealed class CronJobEndpoints : IEndpoint
 {
     public void MapEndpoints(IEndpointRouteBuilder app)
