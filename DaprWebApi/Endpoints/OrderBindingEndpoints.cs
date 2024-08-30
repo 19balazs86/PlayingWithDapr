@@ -28,7 +28,7 @@ public sealed class OrderBindingEndpoints : IEndpoint
     private static StatusCodeHttpResult checkout(Order order, ILogger<OrderBindingEndpoints> logger)
     {
         /* To ENSURE the incoming request is initiated by the Dapr sidecar, you can check
-         * - Request.Headers["dapr-api-token"] == Environment.GetEnvironmentVariable("APP_API_TOKEN")
+         * - Request.Headers["Dapr-Api-Token"] == Environment.GetEnvironmentVariable("APP_API_TOKEN")
          *
          * Setup in Self-Hosted mode
          * - You need to set the APP_API_TOKEN environment variable
@@ -37,6 +37,8 @@ public sealed class OrderBindingEndpoints : IEndpoint
          *
          * - Azure Container App: https://learn.microsoft.com/en-us/azure/container-apps/dapr-authentication-token
          */
+
+        // Note: Request.Headers contains information about the message
 
         // Simulate server error. Dapr will resend the storage queue message with visibilityTimeout
         int statusCode = Random.Shared.NextDouble() <= 0.8 ? StatusCodes.Status200OK : StatusCodes.Status500InternalServerError;

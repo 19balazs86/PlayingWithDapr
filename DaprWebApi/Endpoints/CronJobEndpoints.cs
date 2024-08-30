@@ -17,6 +17,8 @@ public sealed class CronJobEndpoints : IEndpoint
     {
         // Request.Body is empty
 
+        // To ENSURE the incoming request is initiated by the Dapr sidecar: read the checkout method in OrderBindingEndpoints.cs
+
         logger.LogInformation("my-cron-job is triggered at: {time}", DateTime.Now.ToLongTimeString());
     }
 }
