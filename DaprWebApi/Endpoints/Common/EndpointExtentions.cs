@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Reflection;
 
-namespace DaprWebApi.Endpoints;
+namespace DaprWebApi.Endpoints.Common;
 
 public interface IEndpoint
 {

@@ -1,5 +1,6 @@
 ﻿using Dapr.Client;
 using DaprWebApi.DTOs;
+using DaprWebApi.Endpoints.Common;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace DaprWebApi.Endpoints;
@@ -25,7 +26,7 @@ public sealed class OrderPubSubEndpoints : IEndpoint
         var group = app.MapGroup("/orders-pub-sub");
 
         group.MapGet("/publish",   publish);
-        group.MapPost("/checkout", checkout);
+        group.MapPost("/checkout", checkout).AddEndpointFilter<DaprApiTokenEndpointFilter>();
     }
 
     // For simplicity, publish and handle messages within the same application.
@@ -41,6 +42,8 @@ public sealed class OrderPubSubEndpoints : IEndpoint
     // https://docs.dapr.io/developing-applications/building-blocks/pubsub/subscription-methods
     private StatusCodeHttpResult checkout(Order order)
     {
+        // To ENSURE the incoming request is initiated by Dapr use the DaprApiTokenEndpointFilter
+
         // Do not forget: app.UseCloudEvents()
 
         // Simulate server error, and Dapr will retry the message by default

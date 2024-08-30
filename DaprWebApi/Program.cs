@@ -1,4 +1,4 @@
-using DaprWebApi.Endpoints;
+using DaprWebApi.Endpoints.Common;
 
 namespace DaprWebApi;
 

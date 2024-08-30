@@ -1,5 +1,6 @@
 ﻿using Dapr.Client;
 using DaprWebApi.DTOs;
+using DaprWebApi.Endpoints.Common;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace DaprWebApi.Endpoints;
@@ -14,7 +15,7 @@ public sealed class OrderBindingEndpoints : IEndpoint
         var group = app.MapGroup("/order-binding");
 
         group.MapGet("/invoke",    invoke);
-        group.MapPost("/checkout", checkout);
+        group.MapPost("/checkout", checkout).AddEndpointFilter<DaprApiTokenEndpointFilter>();
     }
 
     // For simplicity, input and output binding within the same application
@@ -27,16 +28,7 @@ public sealed class OrderBindingEndpoints : IEndpoint
 
     private static StatusCodeHttpResult checkout(Order order, ILogger<OrderBindingEndpoints> logger)
     {
-        /* To ENSURE the incoming request is initiated by the Dapr sidecar, you can check
-         * - Request.Headers["Dapr-Api-Token"] == Environment.GetEnvironmentVariable("APP_API_TOKEN")
-         *
-         * Setup in Self-Hosted mode
-         * - You need to set the APP_API_TOKEN environment variable
-         * - Dapr sidecar will include this token in all requests sent to your app
-         * - Documentation: https://docs.dapr.io/operations/security/app-api-token
-         *
-         * - Azure Container App: https://learn.microsoft.com/en-us/azure/container-apps/dapr-authentication-token
-         */
+        // To ENSURE the incoming request is initiated by Dapr use the DaprApiTokenEndpointFilter
 
         // Note: Request.Headers contains information about the message
 

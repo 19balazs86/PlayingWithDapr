@@ -1,4 +1,6 @@
-﻿namespace DaprWebApi.Endpoints;
+﻿using DaprWebApi.Endpoints.Common;
+
+namespace DaprWebApi.Endpoints;
 
 // Cron binding spec: https://docs.dapr.io/reference/components-reference/supported-bindings/cron
 
@@ -10,14 +12,14 @@ public sealed class CronJobEndpoints : IEndpoint
     public void MapEndpoints(IEndpointRouteBuilder app)
     {
         // Endpoint matches the name of the component, defined in: cron-job-binding.yaml
-        app.MapPost("/my-cron-job", handleJob);
+        app.MapPost("/my-cron-job", handleJob).AddEndpointFilter<DaprApiTokenEndpointFilter>();
     }
 
     private static void handleJob(ILogger<CronJobEndpoints> logger)
     {
         // Request.Body is empty
 
-        // To ENSURE the incoming request is initiated by the Dapr sidecar: read the checkout method in OrderBindingEndpoints.cs
+        // To ENSURE the incoming request is initiated by Dapr use the DaprApiTokenEndpointFilter
 
         logger.LogInformation("my-cron-job is triggered at: {time}", DateTime.Now.ToLongTimeString());
     }
