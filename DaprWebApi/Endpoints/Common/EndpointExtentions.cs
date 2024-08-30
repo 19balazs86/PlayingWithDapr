@@ -3,11 +3,6 @@ using System.Reflection;
 
 namespace DaprWebApi.Endpoints.Common;
 
-public interface IEndpoint
-{
-    public void MapEndpoints(IEndpointRouteBuilder routeBuilder);
-}
-
 /* Usage
  * #1 -> services.AddEndpoints()
  * #2 -> app.MapEndpoints()
