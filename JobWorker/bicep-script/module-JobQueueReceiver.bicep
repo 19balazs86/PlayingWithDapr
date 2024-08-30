@@ -58,7 +58,9 @@ resource containerJob 'Microsoft.App/jobs@2024-03-01' = {
             {
               name: 'queue-scaling-rule'
               type: 'azure-queue'
-              // identity: was removed in the latest template, it does not support auth via ManagedIdentity, need to use the con-string
+              //-- Managed identity authentication in scale rules is in public preview. It's available in API version 2024-02-02-preview
+              //-- If ManagedIdentity is used, there is NO need for the rules.auth section and KeyVault anymore
+              // identity: userAssignedIdentity.id
               auth: [
                 {
                   secretRef: 'secret-storage-conn-string'
