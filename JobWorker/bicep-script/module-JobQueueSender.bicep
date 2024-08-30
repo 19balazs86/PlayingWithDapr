@@ -3,10 +3,12 @@ param cronExpression string = ''
 
 var rgLocation = resourceGroup().location
 
+// --> Existing: Managed Environment
 resource containerAppEnv 'Microsoft.App/managedEnvironments@2024-03-01' existing = {
   name: appName
 }
 
+// --> Existing: UserAssigned Identity
 resource userAssignedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' existing = {
   name: appName
 }
