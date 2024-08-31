@@ -41,7 +41,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing 
 
 var storageAccountConnectionString = 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};AccountKey=${storageAccount.listKeys().keys[0].value};EndpointSuffix=${environment().suffixes.storage}'
 
-// --> Secret
+// --> Create a Secret value in KeyVault
 // https://learn.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets
 
 resource kvSecret 'Microsoft.KeyVault/vaults/secrets@2023-07-01' = {
