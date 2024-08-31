@@ -36,14 +36,14 @@ resource containerJob 'Microsoft.App/jobs@2024-03-01' = {
   properties: {
     environmentId: containerAppEnv.id
     configuration: {
-      triggerType: cronExpression == '' ? 'Manual' : 'Schedule'
+      triggerType: empty(cronExpression) ? 'Manual' : 'Schedule'
       replicaTimeout: 90 // seconds
       replicaRetryLimit: 0
-      manualTriggerConfig: cronExpression != '' ? null : {
+      manualTriggerConfig: !empty(cronExpression) ? null : {
         parallelism: 1
         replicaCompletionCount: 1
       }
-      scheduleTriggerConfig: cronExpression == '' ? null : {
+      scheduleTriggerConfig: empty(cronExpression) ? null : {
         cronExpression: cronExpression
         parallelism: 1
         replicaCompletionCount: 1
