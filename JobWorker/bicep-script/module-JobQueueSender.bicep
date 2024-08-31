@@ -13,6 +13,11 @@ resource userAssignedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@
   name: appName
 }
 
+// --> Existing: Storage Account
+resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
+  name: toLower(appName)
+}
+
 // --> Container Job: Queue-sender (Trigger: Manual or Schedule)
 
 // - Bicep template: https://learn.microsoft.com/en-us/azure/templates/microsoft.app/jobs
@@ -61,6 +66,10 @@ resource containerJob 'Microsoft.App/jobs@2024-03-01' = {
             {
               name: 'WorkerSettings__IsShortRunningJob'
               value: 'true'
+            }
+            {
+              name: 'WorkerSettings__QueueEndpointUrl'
+              value: storageAccount.properties.primaryEndpoints.queue
             }
             {
               name: 'AZURE_CLIENT_ID' // MUST specify which UserAssigned Identity can be used by the DefaultAzureCredential
