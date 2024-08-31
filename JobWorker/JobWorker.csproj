@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 
-    <!-- dotnet publish -t:PublishContainer -->
+    <!-- dotnet publish -t:PublishContainer -p:UseAppHost=false -->
 
     <IsPublishable>true</IsPublishable>
     <EnableSdkContainerSupport>true</EnableSdkContainerSupport>

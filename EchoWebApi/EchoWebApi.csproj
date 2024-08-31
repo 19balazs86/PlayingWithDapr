@@ -6,8 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
 
     <!-- https://learn.microsoft.com/en-us/dotnet/core/docker/publish-as-container -->
-    <!-- Short: dotnet publish -t:PublishContainer -->
-    <!-- Long:  dotnet publish -p PublishProfile=DefaultContainer -->
+    <!-- Short: dotnet publish -t:PublishContainer -p:UseAppHost=false -->
+    <!-- Long:  dotnet publish -p PublishProfile=DefaultContainer -p:UseAppHost=false -->
 
     <IsPublishable>true</IsPublishable>
     <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
