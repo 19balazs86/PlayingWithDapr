@@ -83,3 +83,5 @@ This repository contains various examples for testing Dapr features both locally
 - This is a continuation of the previous template with the [main-job.bicep](JobWorker/bicep-script/main-job.bicep) file
 - KeyVault with a secret holding the Storage Account connection string
 - Jobs: Queue Sender (trigger: Manual) | Queue Receiver (trigger: Event)
+
+![Bicep Job template](JobWorker/bicep-script/bicep-infrastructure.JPG)
