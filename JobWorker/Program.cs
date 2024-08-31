@@ -72,6 +72,9 @@ public static class Program
     {
         ExcludeEnvironmentCredential      = true,
         ExcludeWorkloadIdentityCredential = true,
-        ExcludeManagedIdentityCredential  = true,
+        ExcludeManagedIdentityCredential  = true
+        // In production, you can set this value to be more specific, if you deviate from the default AZURE_CLIENT_ID environment variable name
+        // Or instead of using DefaultAzureCredential, you can also use ManagedIdentityCredential(clientId: "UserAssignedClientId")
+        // ManagedIdentityClientId = configuration["AZURE_CLIENT_ID"]
     };
 }
