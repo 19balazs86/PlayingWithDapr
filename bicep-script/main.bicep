@@ -4,11 +4,15 @@ param rgLocation string = resourceGroup().location
 var daprApiName    = 'dapr-api'
 var echoServerName = 'echo-server'
 
+var nameToken = substring(uniqueString(resourceGroup().id), 0, 4)
+
+var storageAccountName = toLower('${appName}${nameToken}')
+
 // --> Storage account
 // https://learn.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
-  name: toLower(appName)
+  name: storageAccountName
   location: rgLocation
   kind: 'StorageV2'
   sku: {

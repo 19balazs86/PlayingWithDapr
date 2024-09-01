@@ -8,6 +8,5 @@ az deployment group create \
     --name "Main-Job-Deployment" \
     --resource-group "ContainerAppDaprTest" \
     --template-file "main-job.bicep" \
-    --parameters "@main-job.parameters.json" \
-    --parameter azureUserObjectID=$AZURE_USER_OBJECT_ID # From env-variable
-    # --query "properties.outputs" # https://jmespath.org
+    --parameters "@main-job.parameters.json"
+    # --parameter azureUserObjectID=$AZURE_USER_OBJECT_ID # From env-variable

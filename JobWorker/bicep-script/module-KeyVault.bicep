@@ -1,5 +1,6 @@
 param appName string
-param azureUserObjectID string
+param keyVaultName string
+param storageAccountName string
 
 var rgLocation = resourceGroup().location
 var tenantId = subscription().tenantId
@@ -11,7 +12,7 @@ var tenantId = subscription().tenantId
 // https://learn.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
-  name: appName
+  name: keyVaultName
   location: rgLocation
   properties: {
     tenantId: tenantId
@@ -19,24 +20,24 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
       family: 'A'
       name: 'standard'
     }
-    accessPolicies: [
-      {
-        tenantId: tenantId
-        objectId: azureUserObjectID
-        permissions: {
-          certificates: ['all']
-          keys: ['all']
-          secrets: ['all']
-          storage: ['all']
-        }
-      }
-    ]
+    // !!! If you want to manage KeyVault in the Azure Portal using your account, you need to assign the 'Key Vault Administrator' role, as the 'Owner' role alone is not sufficient
+    enableRbacAuthorization: true // RBAC (Role-Based Access Control) is the recommended approach
+    // Using access policies is considered legacy: https://learn.microsoft.com/en-us/azure/key-vault/general/assign-access-policy
+    // accessPolicies: [
+    //   {
+    //     tenantId: userAssignedIdentity.properties.tenantId
+    //     objectId: userAssignedIdentity.properties.principalId
+    //     permissions: {
+    //       secrets: ['Get']
+    //     }
+    //   }
+    // ]
   }
 }
 
 // --> Existing: Storage Account
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
-  name: toLower(appName)
+  name: storageAccountName
 }
 
 var storageAccountConnectionString = 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};AccountKey=${storageAccount.listKeys().keys[0].value};EndpointSuffix=${environment().suffixes.storage}'

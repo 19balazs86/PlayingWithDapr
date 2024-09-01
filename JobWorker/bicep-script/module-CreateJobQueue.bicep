@@ -1,4 +1,4 @@
-param appName string
+param storageAccountName string
 
 var jobQueueName = 'job-queue'
 
@@ -7,7 +7,7 @@ var jobQueueName = 'job-queue'
 
 // --> Existing: Storage Account
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
-  name: toLower(appName)
+  name: storageAccountName
 }
 
 // --> Queue Service

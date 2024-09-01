@@ -1,4 +1,6 @@
 param appName string
+param storageAccountName string
+param storageQueueEndpoint string
 #disable-next-line secure-secrets-in-params
 param connStringSecretIdentifier string
 
@@ -12,11 +14,6 @@ resource containerAppEnv 'Microsoft.App/managedEnvironments@2024-03-01' existing
 // --> Existing: UserAssigned Identity
 resource userAssignedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' existing = {
   name: appName
-}
-
-// --> Existing: Storage Account
-resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
-  name: toLower(appName)
 }
 
 // --> Container Job: Queue-receiver (Trigger: Event)
@@ -73,7 +70,7 @@ resource containerJob 'Microsoft.App/jobs@2024-03-01' = {
                 }
               ]
               metadata: {
-                accountName: toLower(appName) // Storage Account name
+                accountName: storageAccountName
                 queueLength: '5'
                 queueName: 'job-queue'
               }
@@ -104,7 +101,7 @@ resource containerJob 'Microsoft.App/jobs@2024-03-01' = {
             }
             {
               name: 'WorkerSettings__QueueEndpointUrl'
-              value: storageAccount.properties.primaryEndpoints.queue
+              value: storageQueueEndpoint
             }
             {
               name: 'AZURE_CLIENT_ID' // MUST specify which UserAssigned Identity can be used by the DefaultAzureCredential
