@@ -10,4 +10,8 @@
     <PackageReference Include="Dapr.Actors.AspNetCore" Version="1.14.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ActorInterfaces\ActorInterfaces.csproj" />
+  </ItemGroup>
+
 </Project>

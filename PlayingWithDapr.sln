@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobWorker", "JobWorker\JobW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActorService", "ActorService\ActorService.csproj", "{3BC6327E-269B-4BE6-9AEB-0018B02146AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActorInterfaces", "ActorInterfaces\ActorInterfaces.csproj", "{140C84C0-845C-4B1D-B145-6FD0D3CAF3BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{3BC6327E-269B-4BE6-9AEB-0018B02146AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BC6327E-269B-4BE6-9AEB-0018B02146AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BC6327E-269B-4BE6-9AEB-0018B02146AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{140C84C0-845C-4B1D-B145-6FD0D3CAF3BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{140C84C0-845C-4B1D-B145-6FD0D3CAF3BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{140C84C0-845C-4B1D-B145-6FD0D3CAF3BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{140C84C0-845C-4B1D-B145-6FD0D3CAF3BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
