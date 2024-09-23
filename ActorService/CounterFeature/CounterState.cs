@@ -1,4 +1,4 @@
-﻿namespace ActorInterfaces;
+﻿namespace ActorService.CounterFeature;
 
 public sealed class CounterState
 {

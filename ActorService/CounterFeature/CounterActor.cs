@@ -1,5 +1,4 @@
-﻿using ActorInterfaces;
-using Dapr.Actors.Runtime;
+﻿using Dapr.Actors.Runtime;
 
 namespace ActorService.CounterFeature;
 

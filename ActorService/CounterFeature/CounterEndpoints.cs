@@ -1,5 +1,4 @@
-﻿using ActorInterfaces;
-using Dapr.Actors;
+﻿using Dapr.Actors;
 using Dapr.Actors.Client;
 using System.Collections.Concurrent;
 
