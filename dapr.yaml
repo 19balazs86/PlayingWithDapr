@@ -19,3 +19,9 @@ apps:
   appProtocol: https
   daprHTTPPort: 3511
   command: ["dotnet", "run"]
+- appID: actor-service
+  appDirPath: ./ActorService
+  appPort: 5140
+  appProtocol: http
+  daprHTTPPort: 3512
+  command: ["dotnet", "run"]

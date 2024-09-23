@@ -1,0 +1,6 @@
+@ActorService_HostAddress = http://localhost:5140
+
+GET {{ActorService_HostAddress}}/
+Accept: application/json
+
+###

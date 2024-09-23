@@ -5,7 +5,10 @@ metadata:
 spec:
   type: state.in-memory
   version: v1
-  metadata: []
+  metadata:
+  - name: actorStateStore
+    value: "true"
+
 # --- Redis ---
 # apiVersion: dapr.io/v1alpha1
 # kind: Component
