@@ -1,9 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>DaprWebApi</UserSecretsId>
 
     <!-- https://learn.microsoft.com/en-us/dotnet/core/docker/publish-as-container -->
