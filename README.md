@@ -28,10 +28,15 @@ This repository contains various examples for testing Dapr features both locally
 - This is a worker service responsible for sending and receiving messages from a Storage Queue
 - Based on the configuration, it can either be a short-running Container-Job or a long-running Container-App (scaling rule can be applied)
 
+#### `ActorService`
+
+- A simple project featuring a [CounterActor](ActorService/CounterFeature/CounterActor.cs ) example to explore the Dapr Actors framework
+
 ## Resources
 
 - [Documentation](https://docs.dapr.io) 📓*Official*
   - [Building blocks](https://docs.dapr.io/developing-applications/building-blocks)
+    - [Actors](https://docs.dapr.io/developing-applications/building-blocks/actors) | [.NET SDK](https://docs.dapr.io/developing-applications/sdks/dotnet/dotnet-actors) | [Quickstart](https://docs.dapr.io/getting-started/quickstarts/actors-quickstart) | [Example](https://github.com/dapr/quickstarts/tree/master/actors) 👤
   - Reference
     - [Dapr API](https://docs.dapr.io/reference/api)
     - [Component specs](https://docs.dapr.io/reference/components-reference)
