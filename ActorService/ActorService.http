@@ -1,6 +1,9 @@
-@ActorService_HostAddress = http://localhost:5140
+@HostAddress = http://localhost:5140
 
-GET {{ActorService_HostAddress}}/
+GET {{HostAddress}}/counter/add
 Accept: application/json
 
-###
+### Get counter state
+
+GET {{HostAddress}}/counter/MyCounter1/state
+Accept: application/json

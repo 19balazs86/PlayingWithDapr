@@ -401,6 +401,48 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Actor",
+			"item": [
+				{
+					"name": "Call add counter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ActorHostAddress}}/counter/add",
+							"host": [
+								"{{ActorHostAddress}}"
+							],
+							"path": [
+								"counter",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get counter state",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ActorHostAddress}}/counter/MyCounter1/state",
+							"host": [
+								"{{ActorHostAddress}}"
+							],
+							"path": [
+								"counter",
+								"MyCounter1",
+								"state"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -429,6 +471,11 @@
 		{
 			"key": "HostAddress",
 			"value": "https://localhost:7007",
+			"type": "string"
+		},
+		{
+			"key": "ActorHostAddress",
+			"value": "http://localhost:5140",
 			"type": "string"
 		}
 	]
