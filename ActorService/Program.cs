@@ -1,3 +1,6 @@
+using ActorService.CounterFeature;
+using System.Net.Mime;
+
 namespace ActorService;
 
 public static class Program
@@ -11,7 +14,9 @@ public static class Program
         {
             services.AddActors(options =>
             {
+                // Configuration: https://docs.dapr.io/developing-applications/building-blocks/actors/actors-runtime-config
 
+                options.Actors.RegisterActor<CounterActor>();
             });
         }
 
@@ -19,9 +24,11 @@ public static class Program
 
         // Configure the HTTP request pipeline
         {
-            app.MapGet("/", () => "Hello from Actor service!");
+            app.MapGet("/", () => TypedResults.Content("Hello from Actor service | <a href='/counter/add'>Add counter</a>", MediaTypeNames.Text.Html));
 
             app.MapActorsHandlers();
+
+            app.MapCounterEndpoints();
         }
 
         app.Run();

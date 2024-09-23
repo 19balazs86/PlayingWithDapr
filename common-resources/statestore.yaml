@@ -20,3 +20,5 @@ spec:
 #   metadata:
 #   - name: redisHost
 #     value: 127.0.0.1:6379
+#   - name: actorStateStore
+#     value: "true"
