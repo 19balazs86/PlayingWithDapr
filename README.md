@@ -30,7 +30,7 @@ This repository contains various examples for testing Dapr features both locally
 
 #### `ActorService`
 
-- A simple project featuring a [CounterActor](ActorService/CounterFeature/CounterActor.cs ) example to explore the Dapr Actors framework
+- A simple project with a [CounterActor](ActorService/CounterFeature/CounterActor.cs ) to explore Dapr Actor framework
 
 ## Resources
 
