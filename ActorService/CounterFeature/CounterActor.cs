@@ -9,8 +9,6 @@ public sealed class CounterActor : Actor, ICounterActor
 
     private readonly string _name;
 
-    private CounterState? _counterState;
-
     public CounterActor(ActorHost host) : base(host)
     {
         _name = Host.Id.GetId();
@@ -18,30 +16,32 @@ public sealed class CounterActor : Actor, ICounterActor
 
     public async Task<int> Add(int number, CancellationToken ct)
     {
-        if (_counterState is null)
-        {
-            throw new NullReferenceException("The _counterState field is not inicialized");
-        }
-
         Logger.LogInformation("Counter({Name}) Add: {Number}", _name, number);
 
-        _counterState.Value += number;
-        _counterState.LastCall = DateTime.UtcNow;
+        CounterState state = await getState(ct);
 
-        await StateManager.SetStateAsync(_statName, _counterState, ct);
+        state.Value += number;
+        state.LastCall = DateTime.UtcNow;
 
-        return _counterState.Value;
+        await setState(state, ct);
+
+        return state.Value;
     }
 
     public Task<CounterState> Get()
     {
         // ProxyFactory.CreateActorProxy<>() // You can use the ProxyFactory property to manage other actors
 
-        return Task.FromResult(_counterState!);
+        return getState();
     }
 
-    protected override async Task OnActivateAsync()
+    private async Task<CounterState> getState(CancellationToken ct = default)
     {
-        _counterState = await StateManager.GetOrAddStateAsync(_statName, new CounterState());
+        return await StateManager.GetOrAddStateAsync(_statName, new CounterState(), ct);
+    }
+
+    private async Task setState(CounterState state, CancellationToken ct)
+    {
+        await StateManager.SetStateAsync(_statName, state, ct);
     }
 }
