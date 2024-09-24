@@ -429,13 +429,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{ActorHostAddress}}/counter/MyCounter1/state",
+							"raw": "{{ActorHostAddress}}/counter/MyCounter01/state",
 							"host": [
 								"{{ActorHostAddress}}"
 							],
 							"path": [
 								"counter",
-								"MyCounter1",
+								"MyCounter01",
 								"state"
 							]
 						}

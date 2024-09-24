@@ -5,5 +5,5 @@ Accept: application/json
 
 ### Get counter state
 
-GET {{HostAddress}}/counter/MyCounter1/state
+GET {{HostAddress}}/counter/MyCounter01/state
 Accept: application/json

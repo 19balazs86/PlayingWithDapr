@@ -28,7 +28,7 @@ public static class CounterEndpoints
 
     private static async Task<IDictionary<string, int>> handleAdd(IActorProxyFactory actorProxyFactory, CancellationToken cancelToken)
     {
-        string[] counterNames = Enumerable.Range(0, 10).Select(_ => $"MyCounter{Random.Shared.Next(1, 21)}").ToArray();
+        string[] counterNames = Enumerable.Range(0, 10).Select(_ => $"MyCounter{Random.Shared.Next(1, 21):D2}").ToArray();
 
         await Parallel.ForEachAsync(counterNames, cancelToken, async (counterName, ct) =>
         {
