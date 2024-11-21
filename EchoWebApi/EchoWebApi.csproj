@@ -12,7 +12,7 @@
     <ContainerRepository>19balazs86/echo-api</ContainerRepository>
     <ContainerImageTags>1.0;latest</ContainerImageTags>
     <ContainerRuntimeIdentifier>linux-x64</ContainerRuntimeIdentifier>
-    <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0.8-noble-chiseled</ContainerBaseImage>
+    <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:9.0-noble-chiseled</ContainerBaseImage>
     <!--<ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0.8-jammy-chiseled</ContainerBaseImage>-->
 
     <!-- Uncomment it to push to Docker Hub -->
