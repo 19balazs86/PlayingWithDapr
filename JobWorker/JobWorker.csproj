@@ -19,6 +19,6 @@
   <ItemGroup>
     <PackageReference Include="Azure.Storage.Queues" Version="12.21.0" />
     <PackageReference Include="Microsoft.Extensions.Azure" Version="1.10.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
   </ItemGroup>
 </Project>
