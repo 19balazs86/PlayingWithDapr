@@ -50,7 +50,7 @@ This repository contains various examples for testing Dapr features both locally
 - Other
   - [Azure Container Apps with Dapr overview](https://learn.microsoft.com/en-us/azure/container-apps/dapr-overview) 📚*MS-Learn*
   - [Dapr with .NET Aspire](https://learn.microsoft.com/en-us/dotnet/aspire/frameworks/dapr) 📚*MS-Learn*
-  - [Introduction to Dapr](https://www.milanjovanovic.tech/blog/introduction-to-dapr-for-dotnet-developers) 📓*Milan newsletter*
+  - [Introduction to Dapr](https://www.milanjovanovic.tech/blog/introduction-to-dapr-for-dotnet-developers) 📓*Milan newsletter* | [Dapr fundamentals](https://youtu.be/-qFGsvlBmlo) 📽️*14 min*
 
 ## Prerequisites
 
